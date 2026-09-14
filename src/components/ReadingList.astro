@@ -1,0 +1,115 @@
+---
+import { getPublishedCollection } from "astro-course-university/content";
+import { withBase } from "astro-theme-university/url";
+import type { Reading } from "./Readings.astro";
+
+// Every week's readings collapsed into one list, in the order the field
+// produced them rather than the order the course teaches them. Read that way
+// it is a second argument: a 1973 memo defining the problem, a decade of
+// individual disclosures, and then --- from roughly 2005 --- papers whose
+// contribution is a bound or a countermeasure rather than a new channel.
+//
+// A paper cited by two weeks appears once, tagged with both.
+
+const lectures = (await getPublishedCollection("lectures")).sort(
+  (a, b) => a.data.week - b.data.week,
+);
+
+const entries = new Map<string, { reading: Reading; weeks: number[] }>();
+for (const lecture of lectures) {
+  for (const reading of (lecture.data.readings ?? []) as Reading[]) {
+    const key = reading.url ?? `${reading.authors} ${reading.year} ${reading.title}`;
+    const existing = entries.get(key);
+    if (existing) existing.weeks.push(lecture.data.week);
+    else entries.set(key, { reading, weeks: [lecture.data.week] });
+  }
+}
+
+const bibliography = [...entries.values()].sort(
+  (a, b) => a.reading.year - b.reading.year || a.reading.authors.localeCompare(b.reading.authors),
+);
+---
+
+<ol class="bibliography">
+  {
+    bibliography.map(({ reading, weeks }) => (
+      <li>
+        <span class="year">{reading.year}</span>
+        <span class="entry">
+          {reading.authors}.{" "}
+          {reading.url ? (
+            <a href={reading.url}>
+              <cite>{reading.title}</cite>
+            </a>
+          ) : (
+            <cite>{reading.title}</cite>
+          )}
+          . <span class="where">{reading.venue}.</span>{" "}
+          <span class="weeks">
+            {weeks.map((week, index) => (
+              <>
+                {index > 0 && ", "}
+                <a href={withBase(`/lectures/week-${String(week).padStart(2, "0")}/`)}>
+                  week {week}
+                </a>
+              </>
+            ))}
+          </span>
+        </span>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .bibliography {
+    margin-block: 1.5rem 2rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .bibliography li {
+    display: flex;
+    gap: 1rem;
+    padding-block: 0.6rem;
+    border-block-start: 1px solid var(--at-border, currentColor);
+    line-height: 1.5;
+  }
+
+  .year {
+    flex: 0 0 3.5rem;
+    color: var(--at-text-secondary);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+
+  .entry {
+    max-width: 62ch;
+  }
+
+  .where {
+    color: var(--at-text-secondary);
+  }
+
+  .weeks {
+    white-space: nowrap;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  cite {
+    font-style: normal;
+  }
+
+  @media (width < 30rem) {
+    .bibliography li {
+      display: block;
+    }
+
+    .year {
+      display: block;
+      margin-block-end: 0.15rem;
+    }
+  }
+</style>

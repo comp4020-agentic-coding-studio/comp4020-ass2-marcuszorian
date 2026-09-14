@@ -172,6 +172,27 @@ decks currently measure. Tightening it to today's maximum would turn every
 later edit into a failure that teaches nothing, and it was 45 for one
 commit, which no deck in the repo could have met.
 
+## Every week cites what it argues from
+
+The Channel Report asks students to cite the original disclosure of a
+channel, so the course has to model that. Each lecture declares `readings:`
+--- `{authors, year, title, venue, url?}`, at least one, required by the
+schema --- rendered on the lecture page and collected chronologically on
+`/lectures/`. A week with nothing to read is a week arguing from its own
+assertion.
+
+Get the bibliographic details from the publisher record, not from memory.
+Doing that is what caught week 7 citing the 2009 follow-up's author list on
+the 2008 paper's title, with the 2009 paper's results attached.
+
+`spec/citations.test.ts` holds three things that rot: a year named in prose
+with no reading behind it, a source cited by two weeks whose two copies
+disagree, and readings that are still in the frontmatter but no longer
+render. It deliberately does *not* require every declared reading to be
+named in the prose --- that would mean either dropping the sources a week
+should send students to but has no sentence about, or padding the prose with
+name-drops.
+
 ## The prose may not promise something the site does not have
 
 A cross-reference in prose is invisible to the link checker, because it is

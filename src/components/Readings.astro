@@ -1,0 +1,57 @@
+---
+// The primary sources a week is built on, rendered where the argument that
+// leans on them is. The Channel Report asks students to cite the original
+// disclosure of a channel; a course that names papers in prose without a
+// year, a venue or a link is asking for something it does not model.
+
+export interface Reading {
+  authors: string;
+  year: number;
+  title: string;
+  venue: string;
+  url?: string;
+}
+
+const { readings } = Astro.props as { readings: Reading[] };
+---
+
+<h2>Readings</h2>
+<ol class="readings">
+  {
+    readings.map((reading) => (
+      <li>
+        <span class="who">
+          {reading.authors} ({reading.year}).
+        </span>{" "}
+        {reading.url ? (
+          <a href={reading.url}>
+            <cite>{reading.title}</cite>
+          </a>
+        ) : (
+          <cite>{reading.title}</cite>
+        )}
+        . <span class="where">{reading.venue}.</span>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .readings {
+    max-width: 62ch;
+    padding-inline-start: 1.2rem;
+  }
+
+  .readings li {
+    margin-block-end: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .where {
+    color: var(--at-text-secondary);
+  }
+
+  cite {
+    font-style: normal;
+  }
+</style>

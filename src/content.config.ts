@@ -28,6 +28,18 @@ const axisSchema = z.object({
   name: z.string().trim().min(1),
   question: z.string().trim().min(20),
 });
+// A primary source, declared as data rather than named in passing prose, so
+// the lecture page and the course-wide bibliography render from one record.
+// `url` is optional because a book need not have one; everything else is
+// required, because a citation without a venue or a year is not a citation.
+const readingSchema = z.object({
+  authors: z.string().trim().min(3),
+  year: z.number().int().min(1940).max(2030),
+  title: z.string().trim().min(5),
+  venue: z.string().trim().min(2),
+  url: z.url().optional(),
+});
+
 const courseNodeLoader = (dir: string) =>
   glob({ pattern: ["**/*.{md,mdx}", "!**/CLAUDE.md"], base: `src/content/${dir}` });
 const teacherRefs = z.array(reference("people")).min(1);
@@ -92,6 +104,9 @@ export const collections = {
         claim: z.string().trim().min(60).max(220),
         channel: channelSchema,
         axes: z.array(axisSchema).min(2).optional(),
+        // Required, not optional: a week with nothing to read is a week
+        // arguing from its own assertion.
+        readings: z.array(readingSchema).min(1),
         slides: z
           .string()
           .regex(/^\/decks\/[a-z0-9-]+\/$/)
