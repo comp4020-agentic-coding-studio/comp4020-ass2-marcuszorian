@@ -3,57 +3,71 @@
 ## What I built
 
 SLOP4979, *Side Channels: What Machines Say Without Meaning To* — a
-twelve-week, image-free course teaching acoustic, power, timing,
-electromagnetic, cache, optical and thermal side channels as one compounding
-argument: a computer leaks information through channels nobody designed in,
-and the semester asks what noticing each one is worth. Three assessments
-(30/30/40) build from reading a single trace, to a full channel report, to a
-capstone design review that applies the whole taxonomy to one device.
+twelve-week, image-free course on seven physical channels, taught as one
+compounding argument rather than a list of topics. Three assessments
+(30/30/40) run from reading a single trace to a capstone design review.
 
-## How I got here
+## Choosing the concept, and the level
 
-The harness and brief came first: the starter arrived fixed, and the
-course-code commit [`b4cc573`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/b4cc573)
-fixed the code before any content existed. Before writing anything I ran
-`pnpm check` and found it already red —
-[`29ff4c5`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/29ff4c5)'s
-own spec test asserted twelve dated sessions, weeks 1-12, and only two
-session files existed. That failure became the plan's anchor rather than
-something to route around: every step after it was scoped so the repo never
-stayed red longer than it took to reach the next green state.
+Concept selection was adversarial rather than first-idea: several candidates
+were scored against the brief's own criteria before the user asked which
+would allow the highest grade. Side channels won because its twelve weeks
+compound into one thesis, and because that structure is mechanically
+checkable — one `claim:` per week, no two the same — in a way a looser topic
+is not. [`eb10325`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/eb10325)
+records that decision, the deadpan register rule, and the image-free choice.
 
-Choosing the course concept was adversarial rather than first-idea: I
-evaluated several candidates against the brief's own three criteria before
-the user asked directly, "which of those 3 would you say is strongest, and
-would allow me to achieve the highest grades." Side channels won because its
-twelve weeks compound into one thesis instead of listing independent topics,
-and because that structure is mechanically checkable — cross-linking,
-week-span, weight-sum — in a way a looser topic is not.
-[`eb10325`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/eb10325)
-records that decision in CLAUDE.md, alongside the deadpan-register rule and
-the image-free choice: rather than commission stand-in art for four deleted
-starter images, the course drops imagery entirely, which
-`scripts/check-evidence.ts`'s own comments call a legitimate design decision,
-and which also suits a course about what a machine reveals without meaning
-to.
+The starter's `SLOP1979` was a 1000-level code on a course that estimates
+mutual information and rewrites for constant time. Only the leading digit is
+free and it does not affect the mark; plausibility does.
+[`c17f3a9`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/c17f3a9)
+moved it rather than leave the default unexamined. The no-imagery rule
+likewise earned an amendment:
+[`d5fc35d`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/d5fc35d)
+permits inline SVG data figures — a power trace, a thermal decay, a cost
+curve — because a course about measurement that shows no measurements argues
+against itself. Photography and portraits stay out.
 
-[`f85da51`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/f85da51)
-is the content commit: identity, copy, both staff bios, all twelve lectures
-and Benches, three real assessments, two decks, and real policy content,
-landing in one commit specifically so the repo moved from red to green in a
-single step rather than staying red across a config commit and a separate
-content commit. It also extended the existing sessions-span-twelve-weeks
-test to lectures, so the same contract now holds both collections.
+## Two decisions worth the space
 
-[`70b1408`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/70b1408)
-is a harness-only follow-up, kept separate from content per this repo's own
-CLAUDE.md rule that harness changes get their own commit: a cross-linking
-test confirming every week's lecture and Bench reference each other and that
-every assessment links back to a session, and a voice-lint scanning all
-content for the banned marketing phrases and exclamation points the register
-rule already names in prose, so a later pass over the content cannot
-reintroduce them unnoticed.
+**A defect class, closed once.** Four pages named "Assignment 1", which is
+not an assessment this site publishes. One week referred to "the deck" it did
+not have. Another sent students to readings that did not exist. Three edits
+would have fixed three symptoms;
+[`b1398dc`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/b1398dc)
+fixed the content and
+[`3d7f5b3`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/3d7f5b3)
+added the contract: *the prose may not promise something the site does not
+have*. Mutating the content back proved the point twice over — the first
+version of that test **passed** the mutation, because it read `title` from
+the wrong level of the generated API and was comparing every page against the
+empty string. A test never seen to fail is not evidence of anything, so every
+harness commit here was mutation-tested before it landed.
 
-The suite now runs 92 tests across four spec files, alongside the build's own
-accessibility, internal-link, and deck-compilation checks — all green,
-verified with `pnpm check` before each commit rather than after.
+**Deleting a week's work.** CLAUDE.md holds that a week which could be
+deleted without the argument weakening is the wrong week. Week 8's Bench
+ranked channels on three axes; week 10's Bench ranked channels on the
+taxonomy's own axes, with a number attached.
+[`3bcfa49`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/3bcfa49)
+deleted the first and made week 8 measure the thermal decay its own lecture
+describes. The same defect had put four different channel counts on four
+pages, so
+[`26b665f`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/26b665f)
+derives the number from frontmatter and fails the build on any page that
+disagrees.
+
+## What I did not build
+
+Five decks, deliberately. Week 7 is optical and this site is image-free, so
+its deck would be prose about photographs it cannot show; weeks 1 and 9 are
+arguments, not procedures. No transient-execution week either: it is the
+decade's most consequential disclosure and it leaks what a program only
+*speculated*, which is a different argument on different prerequisites, so
+weeks 6 and 12 state that boundary as a decision
+([`9ca653d`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/9ca653d))
+rather than leave a silent gap.
+
+CI runs nothing while the repo is private, so `pnpm check` and
+`pnpm check:evidence` ran locally before every commit — 184 tests, 45 pages,
+and 79 slides measured for fit in a real browser rather than asserted against
+parsed HTML.
