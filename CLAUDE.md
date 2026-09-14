@@ -70,12 +70,12 @@ weakening, it's the wrong week.
   mechanism and the historical disclosure that established it," never "here is
   how you'd build one." That's also just what the material calls for: a
   history-and-measurement course, not a tool.
-- **Image-free, deliberately**: this repo ships with no photography or
-  illustration. `pnpm check:evidence` requires every starter image be
+- **Image-free, deliberately** --- see "Figures are measurements" below for
+  the one narrow exception. No photography, no illustration, no portraits, no
+  hero art, no stock. `pnpm check:evidence` requires every starter image be
   replaced or removed; rather than commission stand-in art, the course drops
-  imagery entirely, which also fits a course about what a machine reveals
-  without meaning to --- there's nothing here to look at, only to measure.
-  Don't reintroduce a hero image or portraits without updating this rule.
+  imagery, which also fits a course about what a machine reveals without
+  meaning to --- there's nothing here to look at, only to measure.
 - **Sessions are labelled "Bench"** (`sessionLabels` in `site-config.ts`) ---
   the weekly hands-on measurement session, distinct from the lecture.
 
@@ -109,6 +109,68 @@ The test reads a count as a *total* when it follows "the" or "all" or opens a
 line, so partitive prose ("four of them you can fill in from your notes")
 stays legal. Add a channel or an axis and the failures tell you every page
 that now lies.
+
+## Figures are measurements, or they don't ship
+
+A course about measurement that shows zero measurements is arguing against
+itself, and a deck that describes a power trace in a paragraph is a deck
+that should not exist. So the image-free rule carves out exactly one thing:
+**inline SVG data figures** --- a trace, a timing scatter, a hit/miss
+histogram, a decay curve, a cost-against-attenuation plot.
+
+The conditions are what make this an extension of the rule rather than an
+abandonment of it:
+
+- **Inline `<svg>` only.** No `<img>`, no raster, no external asset, nothing
+  in `src/assets/`. A figure is markup in the page that draws it.
+- **Plotted from numbers that are in the file**, written where a reader can
+  see them. A shape drawn freehand to look like a trace is illustration, and
+  illustration is what this rule excludes.
+- **Theme-aware**: `currentColor` or the `--at-*` brand tokens, never a
+  hardcoded hex that vanishes in one theme.
+- **`role="img"` with a `<title>` that states the finding**, not the
+  medium. "Hit and miss latencies separate at roughly 100 cycles", not
+  "histogram".
+- **Legible at 390 px**: no axis label smaller than the body text, and
+  nothing that depends on hover.
+
+Still banned, unchanged: photography, portraits, hero art, stock
+illustration, decorative icons, and anything that would need an artist
+rather than a dataset.
+
+## A lecture gets a deck when the steps are the point
+
+A deck when the argument is **stepwise and the steps are the argument**: a
+trace revealed in stages, a table filled column by column, a
+before-and-after pair. Prose that would become a bulleted summary of itself
+does not get a deck --- that is a worse version of the lecture page, and it
+costs a marker a click to find that out.
+
+**A week without a deck must not refer to one.** That clause is here
+because week 6's Bench told students "the deck's outline names where to
+find both" when week 6 had no deck, which is a promise the site cannot
+keep. `spec/deck-policy.test.ts` enforces it.
+
+Every deck: at least six slides, at most 45 words on a content slide, opens
+on a question rather than a title card restating the lecture, carries at
+least one figure or table that is not bullets, and closes by naming what
+the Bench does with it. The word budget is a legibility proxy, not a
+substitute for opening the deck at both viewports and advancing every
+slide.
+
+## Transient execution is out of scope, and says so
+
+Spectre and Meltdown are the most consequential side-channel disclosures of
+the last decade and this course does not teach them. That is a decision,
+not an oversight, and week 6 states it: this course teaches channels that
+leak what a program **actually did**, and transient execution leaks what it
+**speculatively did** --- a different argument resting on
+microarchitectural prerequisites the course has not built.
+
+Don't quietly add a transient-execution week. If a later pass wants one, it
+has to delete this rule and argue the replacement, because the scope
+boundary is doing work: it is what keeps "one channel per week, measured on
+its own terms" true.
 
 ## Harness changes are their own commits
 
