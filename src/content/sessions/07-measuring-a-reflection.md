@@ -33,6 +33,8 @@ the failure itself.
 
 ## Afterwards
 
-Bring your notes on which surface failed and why to the ranking exercise in
-week 8 — "how hard to exploit" and "how hard to defend" are not the same
-question, and this week is evidence for both.
+Keep your notes on which surface failed and why. This channel is the hardest
+of the seven to score on week 10's rubric — the equipment is a camera and the
+defence is a floor plan — and an argument you can already make about why
+"hard to exploit" and "hard to defend" come apart here is worth more there
+than a number you cannot justify.

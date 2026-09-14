@@ -1,8 +1,8 @@
 ---
 title: Channel Report
 description:
-  A full treatment of one side channel from the course's first eight weeks,
-  argued the way the lectures have been arguing them
+  A full treatment of one of the seven channels the course argues, written to
+  the same standard the lectures introducing them were written to
 week: 8
 due: 2027-04-16T12:00:00+10:00
 weight: 30
@@ -22,12 +22,12 @@ spec:
   - the report states a defensive cost for closing the channel, not only the
     mechanism that produces it
 related:
-  - sessions/08-ranking-the-channels
+  - sessions/08-timing-a-decay
 ---
 
 ## The brief
 
-> Choose one channel from weeks 2 through 9. Explain its mechanism, its
+> Choose one channel from weeks 2 through 8. Explain its mechanism, its
 > founding disclosure, and what it costs a defender to close it — as if you
 > were writing the lecture that introduced it.
 

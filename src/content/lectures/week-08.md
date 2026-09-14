@@ -5,10 +5,14 @@ description:
   running after the exploit's own action stops
 week: 8
 date: 2027-04-12
+claim: >-
+  A channel can outlive the computation that produced it, which defeats
+  every defence assuming a defender present while the leak happens.
+channel: thermal
 teachers:
   - idris-fenn
 related:
-  - sessions/08-ranking-the-channels
+  - sessions/08-timing-a-decay
   - assessments/channel-report
 ---
 
@@ -20,18 +24,35 @@ keys pressed, ranked by which residual heat is highest. No recording during
 the act is needed at all; the channel is entirely retrospective, which
 distinguishes it from every channel covered so far.
 
-That retrospective property is this week's point: most of this course's
-defences assume a defender who can act while the leak is happening — shield
-the room, rewrite the comparison, flush the cache. A thermal residue defeats
-that assumption by leaking after the interaction is already over, which is
-also why the paper's own recommended defence is procedural (wait before
-photographing is irrelevant to the victim; using a keypad material with
-faster thermal dissipation is the only lever that helps) rather than
-computational.
+That retrospective property is this week's point, and it has a consequence
+every other week of this course avoided. Every defence so far assumes a
+defender who can act while the leak is happening: shield the room before the
+monitor is switched on, rewrite the comparison before it runs, disable page
+deduplication before the tenant arrives. A thermal residue leaks after the
+interaction is over and after the attacker's own presence would have been
+noticed, so there is no moment at which the defender could have intervened
+and no observation the defender could have made.
+
+What is left is a defence chosen at purchase rather than at runtime.
+Residual heat decays at a rate set by the keypad's material and mass, not by
+anything the software does: the paper's own measurements separate plastic
+keypads, which hold a usable signal for tens of seconds, from brushed metal,
+which dissipates fast enough that recovery fails almost immediately. The
+channel is closed by specifying a different keypad, and by nothing else —
+which is worth naming precisely, because it is the clearest case in the
+course of a leak whose only lever sits with whoever signed the procurement
+order.
+
+The decay also degrades unevenly, which is the detail this week's Bench
+measures. Which keys were pressed survives longer than the order they were
+pressed in, because the ordering is carried by the differences between
+residues rather than by their presence, and those differences shrink first.
 
 ## Outline
 
-- how long thermal residue on a keypad actually persists, and what that
-  implies for a defender's options
-- why this channel needed no access during the keystroke itself
-- what the Bench's ranking exercise this week is checking for
+- how residual heat decays, and why the *order* of the keystrokes is lost
+  before the *set* of them is
+- the structural consequence of a channel with no defender present: no
+  detection, no interruption, no incident to respond to
+- a mitigation with no software component at all, and what that implies for
+  where this channel should be raised — design review, not code review

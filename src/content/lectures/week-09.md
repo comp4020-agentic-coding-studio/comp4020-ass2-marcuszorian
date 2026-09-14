@@ -1,38 +1,54 @@
 ---
-title: A cloud is somebody else's computer, too
+title: Establishing that the hardware is shared
 description:
-  Cross-virtual-machine side channels, and what changes when the neighbouring
-  process is a stranger's, not your own
+  Colocation as a precondition every shared-hardware channel depends on, and
+  as a problem a provider can defend on its own terms
 week: 9
 date: 2027-04-19
+claim: >-
+  Before a shared-hardware channel can be used it has to be found, and
+  locating the sharing is a separate problem with its own separate defence.
+channel: none
 teachers:
   - marisol-quaye
 related:
   - sessions/09-sharing-a-tenant
 ---
 
-Public cloud computing runs many customers' virtual machines on the same
-physical hardware, and week 6's cache-timing mechanism does not care whether
-the two contending processes belong to the same user or to strangers who
-have never met. Ristenpart, Tromer, Shacham and Savage's 2009 paper "Hey,
-You, Get Off of My Cloud" showed both halves of the resulting threat in one
-study: an attacker can determine, from published placement information, when
-their instance is likely colocated with a target's, and can then use exactly
-the kind of cache-contention signal week 6 introduced to extract information
-across that colocation — no misconfiguration required, only the cloud's own
-economics, which favour packing many tenants onto one machine.
+This week introduces no new channel, which is the reason it exists. Every
+shared-hardware channel in this course — week 6's cache timing most
+obviously, but equally the acoustic and thermal channels once the room is
+shared rather than the silicon — carries a precondition that the previous
+seven weeks quietly assumed: the attacker is already next to the victim. On
+a machine you own, that is trivially true and not worth a sentence. On rented
+hardware it is the whole problem, and it is defensible independently of the
+channel it enables.
 
-The paper is as much about placement as about extraction, and this week's
-Bench reflects that split: knowing a co-tenancy channel exists is only useful
-once a defender knows how to tell whether they are exposed to it at all.
-Providers have since made placement harder to infer, but the underlying
-sharing that makes the channel possible is the same economic argument that
-made public cloud computing viable in the first place, and is unlikely to go
-away.
+Ristenpart, Tromer, Shacham and Savage's 2009 paper "Hey, You, Get Off of My
+Cloud" is the study that separated the two questions. Its extraction results
+are, by this course's standards, weak — a coarse same-core cache-contention
+measurement, five years before week 6's technique existed and far below it in
+resolution. Its placement results are the contribution: the authors mapped a
+commercial provider's instance-assignment policy from the outside, using
+internal IP allocation and round-trip times, and showed they could then launch
+instances until one landed on a chosen target's physical host, confirming the
+landing cheaply. No misconfiguration was involved at any point. The enabling
+condition was the provider's own economics, which reward packing tenants
+densely.
+
+Splitting the problem this way changes what a defender can do. The extraction
+step is closed with the expensive, per-channel countermeasures the rest of
+this course prices out. The placement step is closed with scheduling and
+accounting: randomised assignment, dedicated hosts sold at a premium, and not
+publishing the allocation structure an attacker maps from. Providers spent the
+following decade on the second, because it is cheaper and it defends every
+channel at once — which is the first appearance in this course of a defence
+that is not channel-specific, and a preview of the argument week 12 closes on.
 
 ## Outline
 
-- how a customer can infer colocation on shared cloud hardware
-- what changes, and what does not, when week 6's channel is applied across a
-  virtual-machine boundary instead of a process one
-- what a provider can change here without giving up multi-tenancy altogether
+- what a precondition is worth defending separately from what it enables
+- how allocation structure and round-trip time were used to infer, and then
+  arrange, colocation on a commercial provider
+- why the placement defence generalises across channels while every
+  extraction defence in this course does not
