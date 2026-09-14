@@ -110,6 +110,28 @@ line, so partitive prose ("four of them you can fill in from your notes")
 stays legal. Add a channel or an axis and the failures tell you every page
 that now lies.
 
+## Every page states its own name
+
+The image-free decision has a consequence that is easy to miss: the theme
+renders `heroTitle` only alongside a hero image
+(`{heroTitle && resolvedHeroImage && <Hero …/>}`), and `MdxPageLayout` --- the
+layout every `.mdx` page here goes through --- renders no `<h1>` of its own.
+With the imagery gone, four pages shipped with no page title at all:
+`/lectures/`, `/assessments/`, `/people/` and the 404. `/policies/` survived
+only because it hand-writes its heading in the body.
+
+Nothing caught it. Axe's `page-has-heading-one` is a best-practice rule rather
+than a violation, so the accessibility pass stayed green, and a heading is not
+a link, so the link checker had nothing to say.
+
+So the title is rendered in exactly one place --- `src/layouts/PageLayout.astro`,
+ahead of the lead paragraph, the same order `ContentLayout` uses on detail
+routes --- every built page carries exactly one non-empty `<h1>`, and
+`heroTitle:` is not a key this site uses. Don't hand-write a `#` heading in an
+`.mdx` body to compensate; that gives the page two names.
+`spec/page-headings.test.ts` enforces both halves, decks excepted, since a
+deck's headings belong to its slides.
+
 ## Figures are measurements, or they don't ship
 
 A course about measurement that shows zero measurements is arguing against
