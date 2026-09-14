@@ -172,6 +172,22 @@ decks currently measure. Tightening it to today's maximum would turn every
 later edit into a failure that teaches nothing, and it was 45 for one
 commit, which no deck in the repo could have met.
 
+## The prose may not promise something the site does not have
+
+A cross-reference in prose is invisible to the link checker, because it is
+not a link --- it is a sentence asserting that some other part of the site
+exists. Three of them were wrong at once: week 6's Bench sent students to
+"the deck" in a week with no deck, week 9's Bench sent them to "the week's
+readings" when the site publishes no readings, and four pages named
+"Assignment 1", which is not the title of anything here.
+
+So: name an assessment by its `title`, never "Assignment N"; refer to
+another week's Bench, deck or lecture only when that week has one; and
+gesture at readings only where `readings:` is declared.
+`spec/prose-promises.test.ts` reads the assertion out of the prose and
+checks it against the API. The deck half of the same contract lives in
+`spec/deck-policy.test.ts`, with the rest of the deck rules.
+
 ## Transient execution is out of scope, and says so
 
 Spectre and Meltdown are the most consequential side-channel disclosures of
