@@ -5,6 +5,11 @@ description:
   a printout of the arithmetic it is doing
 week: 3
 date: 2027-03-08
+claim: >-
+  A single measurement can be unreadable while ten thousand of the same
+  measurement are decisive: statistics, not sensitivity, makes a channel
+  practical.
+channel: power
 teachers:
   - marisol-quaye
 slides: /decks/week-03/
@@ -32,8 +37,11 @@ ask you to do the harder version — many traces, added together — yourself.
 
 ## Outline
 
-- what a power trace looks like for a single, known operation
-- simple power analysis (reading one trace by eye) versus differential power
-  analysis (correlating many)
-- what "power analysis countermeasure" means at the hardware level, ahead of
-  week 11's software-level treatment of the same problem
+- what a power trace looks like for a single, known operation, and the point
+  at which a real workload stops being readable by eye
+- the step from simple power analysis to differential: what the correlation
+  is computed over, and why the number of traces is the attacker's real
+  budget
+- masking and blinding — randomising the intermediate values so that the
+  correlation has nothing stable to find — and what that randomisation costs
+  in silicon area and throughput

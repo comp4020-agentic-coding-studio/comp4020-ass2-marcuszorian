@@ -5,6 +5,10 @@ description:
   practise it
 week: 11
 date: 2027-05-03
+claim: >-
+  Detecting a leak and closing one are different skills, and a rewrite that
+  only makes a channel harder to see is not a fix.
+channel: none
 teachers:
   - idris-fenn
 related:
@@ -30,7 +34,11 @@ than presenting a rewrite as a strict improvement.
 
 ## Outline
 
-- why "no secret-dependent branches" was not enough, historically
-- what constant-time programming actually requires, and what it gives up
-- how to tell, empirically, whether a rewrite succeeded — reusing week 4's
-  measurement technique
+- the three rules in order of how often they are missed: no secret-dependent
+  branch, no secret-dependent memory address, no compiler left free to
+  reintroduce either
+- blinding as the countermeasure for the case constant-time coding cannot
+  reach — week 4's extra reductions and week 3's power correlation are both
+  closed by randomising the input, not by restructuring the control flow
+- verification, not inspection: why reading the rewritten code proves nothing
+  and what measurement, reusing week 4's harness, is required instead

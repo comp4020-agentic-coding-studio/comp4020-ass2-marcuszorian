@@ -5,6 +5,10 @@ description:
   electronics from broadcasting what it shows
 week: 5
 date: 2027-03-22
+claim: >-
+  Closing a channel is an engineering cost with a shape, and that shape —
+  not the mechanism — decides who ever pays it.
+channel: electromagnetic
 teachers:
   - marisol-quaye
 related:
@@ -30,7 +34,11 @@ Bench prices out never became consumer-affordable.
 
 ## Outline
 
-- what makes a display's emissions reconstructible at a distance
-- why TEMPEST shielding is expensive in a specific, structural way, not just
-  an expensive material
-- who actually pays that cost today, and why almost nobody else does
+- why a raster's emissions are reconstructible rather than merely detectable:
+  the signal repeats on a known schedule, so a receiver can average it out of
+  the noise floor
+- attenuation as a cost curve, not a price: each additional 10 dB costs more
+  than the last, because the remaining leakage moves from the walls to the
+  seams, the ventilation and the mains
+- who pays that curve to its end, and what it means that the same disclosure
+  was classified for decades before it was published

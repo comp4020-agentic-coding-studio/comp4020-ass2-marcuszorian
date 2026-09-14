@@ -5,6 +5,10 @@ description:
   the effect generalises
 week: 2
 date: 2027-03-01
+claim: >-
+  A channel needs no contact and no electronics: a microphone in the room is
+  enough, once a language model supplies what the signal alone cannot.
+channel: acoustic
 teachers:
   - idris-fenn
 related:
@@ -29,8 +33,10 @@ sound quieter.
 
 ## Outline
 
-- what makes one key's sound distinguishable from another's
-- why a language model, not just a better microphone, is what made the
-  attack practical
-- what a keyboard would have to do differently to close this channel, and
-  why almost none do
+- what makes one key's sound distinguishable from another's, in mechanical
+  terms: strike position, plate resonance, and the distance to the recorder
+- why the decisive improvement came from the language being typed rather
+  than from the microphone — the point at which this stopped being a
+  signal-processing result
+- the channel's own limits: what a second, unseen keyboard does to a trained
+  classifier, and why that limit is smaller than it sounds

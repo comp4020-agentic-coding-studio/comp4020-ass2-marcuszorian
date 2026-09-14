@@ -4,6 +4,30 @@ import { z } from "astro/zod";
 import { courseNodeSchema } from "astro-course-university/schemas";
 
 const weekSchema = z.coerce.number().int().min(1).max(12);
+
+// The physical channels this course actually measures, one per week from 2 to
+// 8. A week that introduces no new channel --- the opening, the colocation
+// precondition, the two synthesis weeks, the defence week --- declares
+// "none". The count of distinct non-"none" values is the course's channel
+// count, and prose is not allowed to disagree with it (spec/argument-chain).
+const channelSchema = z.enum([
+  "acoustic",
+  "power",
+  "timing",
+  "electromagnetic",
+  "cache",
+  "optical",
+  "thermal",
+  "none",
+]);
+
+// The leakage taxonomy, declared as data on the week that introduces it so
+// the page renders it, the deck restates it, and the axis count is derived
+// rather than written down twice.
+const axisSchema = z.object({
+  name: z.string().trim().min(1),
+  question: z.string().trim().min(20),
+});
 const courseNodeLoader = (dir: string) =>
   glob({ pattern: ["**/*.{md,mdx}", "!**/CLAUDE.md"], base: `src/content/${dir}` });
 const teacherRefs = z.array(reference("people")).min(1);
@@ -62,6 +86,12 @@ export const collections = {
         week: weekSchema,
         date: z.coerce.date(),
         teachers: teacherRefs.optional(),
+        // One sentence naming what this week changes about the course's
+        // thesis --- not what it covers. Twelve of these, read in order on
+        // /lectures/, are the course's argument.
+        claim: z.string().trim().min(60).max(220),
+        channel: channelSchema,
+        axes: z.array(axisSchema).min(2).optional(),
         slides: z
           .string()
           .regex(/^\/decks\/[a-z0-9-]+\/$/)

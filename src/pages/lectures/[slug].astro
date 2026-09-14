@@ -20,8 +20,46 @@ const title = `Week ${lecture.data.week}: ${lecture.data.title}`;
 
 <ContentLayout title={title} description={lecture.data.description} {...siteConfig}>
   <p><strong>{formatCourseDate(lecture.data.date)}</strong></p>
+  <p class="claim">{lecture.data.claim}</p>
   {lecture.data.slides && <p><a href={withBase(lecture.data.slides)}>Open the slides</a></p>}
   <Content />
+  {
+    lecture.data.axes && (
+      <>
+        <h2>The axes</h2>
+        <dl class="axes">
+          {lecture.data.axes.map((axis) => (
+            <>
+              <dt>{axis.name}</dt>
+              <dd>{axis.question}</dd>
+            </>
+          ))}
+        </dl>
+      </>
+    )
+  }
   <TeachingTeam teachers={lecture.data.teachers} />
   <RelatedContent entry={lecture} collections={graphCollections} />
 </ContentLayout>
+
+<style>
+  .claim {
+    margin-block: 0 2rem;
+    padding-inline-start: 1rem;
+    border-inline-start: 3px solid var(--at-border, currentColor);
+    color: var(--at-text-secondary);
+    font-size: 1.05rem;
+    max-width: 62ch;
+  }
+
+  .axes dt {
+    font-weight: 600;
+  }
+
+  .axes dd {
+    margin-inline-start: 0;
+    margin-block-end: 0.75rem;
+    color: var(--at-text-secondary);
+    max-width: 62ch;
+  }
+</style>

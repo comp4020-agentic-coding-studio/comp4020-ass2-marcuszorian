@@ -5,6 +5,10 @@ description:
   or an eyeball, at a distance and after the fact
 week: 7
 date: 2027-04-05
+claim: >-
+  A surface nobody designed to be a display can be one, which makes this
+  channel a property of the room rather than of the device.
+channel: optical
 teachers:
   - idris-fenn
 related:
@@ -29,7 +33,12 @@ optics that no software patch touches.
 
 ## Outline
 
-- what property of a reflecting surface determines how much detail survives
-- how computational sharpening extends what a naive photograph would show
-- why this channel's defence is architectural (room layout, screen
-  placement) rather than something a device manufacturer can fix
+- specular against diffuse: why a curved teapot is a usable optic and a matte
+  wall is not, and why the curvature costs resolution rather than preventing
+  recovery
+- deconvolution as the step that turns an unreadable photograph into a
+  readable one, and the point at which no amount of processing recovers
+  information the surface never carried
+- a defence that belongs to no vendor: this is the one channel in the course
+  closed by moving furniture, and the only one whose mitigation appears in
+  building standards rather than in an errata sheet

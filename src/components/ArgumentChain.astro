@@ -1,0 +1,80 @@
+---
+import { getPublishedCollection } from "astro-course-university/content";
+import { withBase } from "astro-theme-university/url";
+
+// The twelve `claim:` lines, in week order. Each says what its week changes
+// about the course's thesis, so reading the list top to bottom is the
+// course's argument at a glance rather than twelve page visits.
+const lectures = (await getPublishedCollection("lectures")).sort(
+  (a, b) => a.data.week - b.data.week,
+);
+---
+
+<ol class="chain">
+  {
+    lectures.map((lecture) => (
+      <li class="chain-step">
+        <a class="chain-week" href={withBase(`/lectures/${lecture.id}/`)}>
+          Week {lecture.data.week}
+        </a>
+        {lecture.data.channel !== "none" && (
+          <span class="chain-channel">{lecture.data.channel}</span>
+        )}
+        <p class="chain-claim">{lecture.data.claim}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .chain {
+    margin-block: 1.5rem 2.5rem;
+    padding: 0;
+    list-style: none;
+    border-inline-start: 2px solid var(--at-border, currentColor);
+  }
+
+  .chain-step {
+    position: relative;
+    padding-inline-start: 1.25rem;
+    padding-block: 0.75rem;
+  }
+
+  .chain-step::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: -5px;
+    inset-block-start: 1.35rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--at-text-secondary, currentColor);
+  }
+
+  .chain-week {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .chain-channel {
+    margin-inline-start: 0.5rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    color: var(--at-text-secondary);
+    background: var(--at-bg-alt);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .chain-claim {
+    margin-block: 0.3rem 0;
+    max-width: 62ch;
+  }
+
+  @media (width < 30rem) {
+    .chain-claim {
+      font-size: 0.95rem;
+    }
+  }
+</style>
