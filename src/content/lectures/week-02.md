@@ -11,6 +11,7 @@ claim: >-
 channel: acoustic
 teachers:
   - idris-fenn
+slides: /decks/week-02/
 related:
   - sessions/02-listening-for-keys
 readings:

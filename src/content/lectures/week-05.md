@@ -11,6 +11,7 @@ claim: >-
 channel: electromagnetic
 teachers:
   - marisol-quaye
+slides: /decks/week-05/
 related:
   - sessions/05-shielding-a-room
 readings:

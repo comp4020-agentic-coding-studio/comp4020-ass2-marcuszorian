@@ -1,0 +1,183 @@
+---
+title: Sixty keystrokes
+description:
+  One recording aligned against the passage that produced it, then the same
+  channel with no keyboard in it at all
+---
+
+# Sixty keystrokes
+
+You typed a passage you had already written down, and recorded yourself
+doing it. What is in the recording that is not in the passage?
+
+---
+
+## The recording, unaligned
+
+<svg
+  viewBox="0 0 1020 400"
+  width="100%"
+  role="img"
+  stroke="currentColor"
+  fill="currentColor"
+>
+  <title>
+    Eight bursts of sound along a time axis, each a tall spike followed by a
+    shorter one, with the fifth burst noticeably taller than the rest
+  </title>
+  <line x1="60" y1="200" x2="950" y2="200" stroke-width="2" />
+  <polygon points="96,200 110,130 124,200 110,270" />
+  <polygon points="137,200 146,168 155,200 146,232" />
+  <polygon points="196,200 210,138 224,200 210,262" />
+  <polygon points="237,200 246,172 255,200 246,228" />
+  <polygon points="296,200 310,126 324,200 310,274" />
+  <polygon points="337,200 346,167 355,200 346,233" />
+  <polygon points="396,200 410,142 424,200 410,258" />
+  <polygon points="437,200 446,174 455,200 446,226" />
+  <polygon points="506,200 520,95 534,200 520,305" />
+  <polygon points="547,200 556,153 565,200 556,247" />
+  <polygon points="616,200 630,134 644,200 630,266" />
+  <polygon points="657,200 666,170 675,200 666,230" />
+  <polygon points="716,200 730,140 744,200 730,260" />
+  <polygon points="757,200 766,173 775,200 766,227" />
+  <polygon points="816,200 830,142 844,200 830,258" />
+  <polygon points="857,200 866,174 875,200 866,226" />
+  <text x="505" y="388" font-size="26" text-anchor="middle">time</text>
+</svg>
+
+Sixteen bursts, not eight. Before anything is labelled, that is the only
+fact on the slide worth having.
+
+```notes
+Amplitude envelope of a phone recording, eight characters typed at a
+comfortable pace. Sampling is irrelevant here — everything on this slide
+survives at 16 kHz.
+
+Every keystroke is two events, and the fifth is louder than its neighbours
+by about 4 dB.
+```
+
+---
+
+## One keystroke is two events
+
+The finger drives the key down onto the plate; the key returns and strikes
+its stop. Push, then release, about 100 ms apart.
+
+The push is the informative one. It carries the plate's resonance at the
+position the key sits in, which is why position is recoverable at all.
+
+---
+
+## Aligned against the passage
+
+<svg
+  viewBox="0 0 1020 400"
+  width="100%"
+  role="img"
+  stroke="currentColor"
+  fill="currentColor"
+>
+  <title>
+    The same eight bursts, each labelled with the character typed; the tall
+    fifth burst is the space bar
+  </title>
+  <line x1="60" y1="200" x2="950" y2="200" stroke-width="2" />
+  <polygon points="96,200 110,130 124,200 110,270" />
+  <polygon points="137,200 146,168 155,200 146,232" />
+  <polygon points="196,200 210,138 224,200 210,262" />
+  <polygon points="237,200 246,172 255,200 246,228" />
+  <polygon points="296,200 310,126 324,200 310,274" />
+  <polygon points="337,200 346,167 355,200 346,233" />
+  <polygon points="396,200 410,142 424,200 410,258" />
+  <polygon points="437,200 446,174 455,200 446,226" />
+  <polygon points="506,200 520,95 534,200 520,305" />
+  <polygon points="547,200 556,153 565,200 556,247" />
+  <polygon points="616,200 630,134 644,200 630,266" />
+  <polygon points="657,200 666,170 675,200 666,230" />
+  <polygon points="716,200 730,140 744,200 730,260" />
+  <polygon points="757,200 766,173 775,200 766,227" />
+  <polygon points="816,200 830,142 844,200 830,258" />
+  <polygon points="857,200 866,174 875,200 866,226" />
+  <text x="110" y="58" font-size="34" text-anchor="middle">s</text>
+  <text x="210" y="58" font-size="34" text-anchor="middle">i</text>
+  <text x="310" y="58" font-size="34" text-anchor="middle">d</text>
+  <text x="410" y="58" font-size="34" text-anchor="middle">e</text>
+  <text x="520" y="58" font-size="26" text-anchor="middle">space</text>
+  <text x="630" y="58" font-size="34" text-anchor="middle">o</text>
+  <text x="730" y="58" font-size="34" text-anchor="middle">n</text>
+  <text x="830" y="58" font-size="34" text-anchor="middle">e</text>
+  <text x="110" y="334" font-size="24" text-anchor="middle">push</text>
+  <text x="176" y="366" font-size="24" text-anchor="middle">release</text>
+  <text x="505" y="388" font-size="26" text-anchor="middle">time</text>
+</svg>
+
+The space bar is obvious. Nothing else here is.
+
+---
+
+## What separates by hand, and what does not
+
+Size and position separate: the space bar, Enter, the keys nearest the
+recorder. Four bursts of a two-key alternation separate.
+
+Individual letters do not. That is the boundary this Bench is meant to run
+into, because it is where the 2004 result stopped and the next one started.
+
+---
+
+## The decisive move was not the microphone
+
+Asonov and Agrawal trained on the same keyboard they attacked. The
+improvement came from dropping that requirement and using the language
+instead: spelling, word frequency, letter transitions.
+
+A classifier that is unsure between two keys is resolved by the sentence, not
+by a better recording. The channel became a language problem.
+
+---
+
+## Then the keyboard stopped being necessary
+
+Genkin, Shamir and Tromer recorded the laptop rather than what was typed on
+it. Coils and capacitors in the voltage regulator vibrate as the processor's
+load changes.
+
+| Quantity | Genkin, Shamir and Tromer, 2014 |
+|---|---|
+| Band carrying the signal | under 20 kHz |
+| Sensor | a phone beside the machine, or a good mic at 4 m |
+| Recovered | a full 4096-bit RSA key, in about an hour |
+
+---
+
+## Five orders of magnitude below the clock
+
+The channel never sees an operation. It sees the envelope of very many of
+them, and the key falls out of the aggregate.
+
+Which is the honest answer to how far the effect generalises: not "any
+keyboard" but "any component whose current draw makes a noise."
+
+---
+
+{/* _class: impact */}
+
+# The fix was arithmetic
+
+Nobody shielded anything. GnuPG 1.4.16 shipped exponentiation blinding
+alongside the disclosure — randomise the intermediate values, and a chosen
+ciphertext no longer produces a profile worth measuring.
+
+An acoustic leak, closed in software.
+
+---
+
+## Before the Bench
+
+Record a known passage on one keyboard — phone audio is enough — and keep
+the text. Sixty keystrokes is the floor.
+
+The Bench asks you to align the waveform against the passage by hand, point
+at two keys that are visibly different, and state what would have to be true
+of a second keyboard for the technique to fail.

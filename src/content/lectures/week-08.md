@@ -11,6 +11,7 @@ claim: >-
 channel: thermal
 teachers:
   - idris-fenn
+slides: /decks/week-08/
 related:
   - sessions/08-timing-a-decay
   - assessments/channel-report

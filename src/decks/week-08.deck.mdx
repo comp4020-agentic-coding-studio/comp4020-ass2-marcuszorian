@@ -1,0 +1,196 @@
+---
+title: Residue
+description:
+  A keypad's thermal decay plotted twice — once for the set of keys pressed
+  and once for their order — because the two stop being recoverable at
+  different times
+---
+
+# Residue
+
+A four-digit code was entered on this keypad and the person who entered it
+has gone. How long do you have? And how long do you have for the harder
+question, which is what order they pressed them in?
+
+---
+
+## What the finger left
+
+Contact warms the key by roughly three degrees above ambient. The key cools
+back through its own mass and the air, on a time constant set by the
+material and by nothing the device is running.
+
+Every other channel in this course stops when the computation stops. This
+one starts then.
+
+---
+
+## Four keys, cooling
+
+<svg
+  viewBox="0 0 1020 400"
+  width="100%"
+  role="img"
+  stroke="currentColor"
+  fill="currentColor"
+>
+  <title>
+    Four decay curves, so close together they read as one band, falling from
+    about three degrees at release to below a quarter of a degree by
+    fifty-six seconds
+  </title>
+  <line x1="80" y1="320" x2="900" y2="320" stroke-width="2" />
+  <line x1="80" y1="30" x2="80" y2="320" stroke-width="2" />
+  <text x="62" y="328" font-size="24" text-anchor="end">0</text>
+  <text x="62" y="199" font-size="24" text-anchor="end">1.5</text>
+  <text x="62" y="48" font-size="24" text-anchor="end">3.0</text>
+  <text x="80" y="356" font-size="24" text-anchor="middle">0</text>
+  <text x="513" y="356" font-size="24" text-anchor="middle">50</text>
+  <text x="860" y="356" font-size="24" text-anchor="middle">90</text>
+  <text x="490" y="390" font-size="24" text-anchor="middle">seconds after release</text>
+  <text x="20" y="22" font-size="24">K above ambient</text>
+  <polyline
+    fill="none"
+    stroke-width="4"
+    points="80,40 167,135 253,198 340,240 427,267 513,285 600,297 687,305 773,310 860,313"
+  />
+  <polyline
+    fill="none"
+    stroke-width="4"
+    points="80,55 167,145 253,205 340,244 427,270 513,287 600,298 687,306 773,311 860,314"
+  />
+  <polyline
+    fill="none"
+    stroke-width="4"
+    points="80,70 167,155 253,211 340,248 427,273 513,289 600,300 687,307 773,311 860,314"
+  />
+  <polyline
+    fill="none"
+    stroke-width="4"
+    points="80,83 167,164 253,217 340,252 427,275 513,291 600,301 687,307 773,312 860,314"
+  />
+  <line x1="80" y1="297" x2="900" y2="297" stroke-width="2" stroke-dasharray="10 8" />
+  <text x="906" y="292" font-size="22">floor</text>
+  <line x1="565" y1="30" x2="565" y2="320" stroke-width="2" stroke-dasharray="4 8" />
+  <text x="565" y="24" font-size="24" text-anchor="middle">56 s</text>
+</svg>
+
+```notes
+Mean intensity over each key's area, converted to kelvin above ambient.
+Peak rise 3.0 K, exponential decay, fitted time constant 24 s for an ABS
+keypad. The four curves are offset only by when each key was pressed: the
+entry took four seconds, so the first key has a four-second head start on
+the last.
+
+Segmentation floor 0.25 K — below that a pressed key is not reliably
+separable from an unpressed one. The last curve crosses it at 56 seconds.
+```
+
+---
+
+## The first window is the obvious one
+
+Every curve falls through the segmentation floor at about the same moment,
+because they differ by four seconds out of ninety.
+
+Fifty-six seconds to recover *which* four keys were pressed. That is the
+number a defender who has read the abstract will quote.
+
+---
+
+## The order is not in any one curve
+
+<svg
+  viewBox="0 0 1020 400"
+  width="100%"
+  role="img"
+  stroke="currentColor"
+  fill="currentColor"
+>
+  <title>
+    The smallest gap between two adjacent keys, starting near sixteen
+    hundredths of a degree and crossing the camera's noise floor at
+    twenty-eight seconds
+  </title>
+  <line x1="80" y1="320" x2="900" y2="320" stroke-width="2" />
+  <line x1="80" y1="30" x2="80" y2="320" stroke-width="2" />
+  <text x="62" y="328" font-size="24" text-anchor="end">0</text>
+  <text x="62" y="188" font-size="24" text-anchor="end">0.10</text>
+  <text x="62" y="48" font-size="24" text-anchor="end">0.20</text>
+  <text x="80" y="356" font-size="24" text-anchor="middle">0</text>
+  <text x="513" y="356" font-size="24" text-anchor="middle">50</text>
+  <text x="860" y="356" font-size="24" text-anchor="middle">90</text>
+  <text x="490" y="390" font-size="24" text-anchor="middle">seconds after release</text>
+  <text x="20" y="22" font-size="24">gap between adjacent keys, K</text>
+  <polyline
+    fill="none"
+    stroke-width="4"
+    points="80,99 167,174 253,224 340,257 427,278 513,292 600,302 687,308 773,312 860,315"
+  />
+  <line x1="80" y1="250" x2="900" y2="250" stroke-width="2" stroke-dasharray="10 8" />
+  <text x="906" y="245" font-size="22">NETD</text>
+  <line x1="323" y1="30" x2="323" y2="320" stroke-width="2" stroke-dasharray="4 8" />
+  <text x="323" y="24" font-size="24" text-anchor="middle">28 s</text>
+</svg>
+
+It is carried by the *differences*, and the differences decay on the same
+constant from a much smaller start.
+
+```notes
+The ranking is only as good as the closest pair. Two keys pressed 1.3 s
+apart start 0.16 K apart and decay together, so the gap crosses the
+camera's noise-equivalent temperature difference — 0.05 K for an ordinary
+uncooled sensor — at 28 seconds.
+
+Half the first window. Same trace, same camera, same room.
+```
+
+---
+
+{/* _class: impact */}
+
+# Fifty-six and twenty-eight
+
+The set of keys survives twice as long as their order.
+
+A defender working from one number is working from the wrong one, and it is
+the generous one.
+
+---
+
+## Nobody was there to defend
+
+Shield the room before the monitor is on. Rewrite the comparison before it
+runs. Disable deduplication before the tenant arrives.
+
+There is no equivalent here. The leak begins after the interaction ends and
+after an attacker's presence would have been noticed. No detection, no
+interruption, no incident.
+
+---
+
+## One lever, and it is not software
+
+The time constant is a material property. Change the keypad, or change
+nothing.
+
+| Keypad | Fitted constant | Set recoverable | Order recoverable |
+|---|---|---|---|
+| ABS plastic | 24 s | 56 s | 28 s |
+| Brushed aluminium | 4 s | 9 s | 5 s |
+
+Aluminium does not close the channel. It moves the shorter window inside the
+time it takes to walk to the keypad, which is the same thing to a defender
+and a different thing to an argument.
+
+---
+
+## Before the Bench
+
+Bring something that reads per-pixel intensity out of an image and plots a
+series. The Bench supplies ninety seconds of frames after a known four-digit
+entry.
+
+Fit the decay, then plot the pairwise differences beside the raw series and
+find both windows. Keep the constant: week 10 puts this channel on a common
+rubric, and your fitted number is what it wants.

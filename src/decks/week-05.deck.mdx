@@ -1,0 +1,139 @@
+---
+title: The last 20 dB
+description:
+  Attenuation priced as a curve rather than a number, and the arithmetic that
+  says how much of it an attacker buys back by waiting
+---
+
+# The last 20 dB
+
+Shielding a room is a purchase, not a decision. What does each additional
+10 dB cost, and where on that curve does everyone who is not a government
+stop buying?
+
+---
+
+## Why the emission is reconstructible
+
+A display drives its image on a fixed schedule and repeats the frame sixty
+times a second. A receiver that knows the schedule can add the repeats
+together.
+
+That is the whole reason this is a picture rather than a hiss: the signal is
+periodic and the noise is not.
+
+---
+
+## What the target actually is
+
+Attenuation is not measured against audibility. It is measured against how
+long an attacker is willing to sit outside.
+
+Coherent averaging of N repeats buys back 10·log₁₀(N) dB. Sixty frames a
+second is the exchange rate.
+
+---
+
+## The exchange rate, written out
+
+| Attenuation | Repeats needed to undo it | Time on a 60 Hz display |
+|---|---|---|
+| 10 dB | 10 | 0.17 s |
+| 20 dB | 100 | 1.7 s |
+| 40 dB | 10,000 | 2.8 min |
+| 60 dB | 1,000,000 | 4.6 hours |
+| 80 dB | 100,000,000 | 19 days |
+
+The first two rows are free to the attacker. The defender pays for all five.
+
+```notes
+This is the number that makes the cost curve legible. A defender thinking in
+decibels is thinking in a unit the attacker converts to patience, and the
+conversion is brutally cheap until roughly 40 dB.
+
+19 days also assumes the target displays the same frame for 19 days, which
+is where the arithmetic stops being the binding constraint and the threat
+model takes over.
+```
+
+---
+
+## What each band costs to build
+
+| Target | What buys it | Where the leak has moved |
+|---|---|---|
+| 20 dB | conductive paint or foil on the walls | the door |
+| 40 dB | mesh through every wall, floor and ceiling | ventilation and cable entries |
+| 60 dB | waveguide vents, filtered mains, RF door gasket | the gasket's maintenance schedule |
+| 80 dB | welded enclosure, isolated power, no penetrations | the people who have to work inside it |
+
+Each row closes the dominant leak and promotes the next one.
+
+---
+
+## The shape, not the total
+
+<svg
+  viewBox="0 0 1020 400"
+  width="100%"
+  role="img"
+  stroke="currentColor"
+  fill="currentColor"
+>
+  <title>
+    Relative cost against attenuation target, flat from twenty to fifty
+    decibels and then rising almost vertically between sixty and eighty
+  </title>
+  <line x1="80" y1="320" x2="900" y2="320" stroke-width="2" />
+  <line x1="80" y1="30" x2="80" y2="320" stroke-width="2" />
+  <text x="62" y="328" font-size="24" text-anchor="end">0</text>
+  <text x="62" y="188" font-size="24" text-anchor="end">50</text>
+  <text x="62" y="48" font-size="24" text-anchor="end">100</text>
+  <text x="80" y="356" font-size="24" text-anchor="middle">20</text>
+  <text x="340" y="356" font-size="24" text-anchor="middle">40</text>
+  <text x="600" y="356" font-size="24" text-anchor="middle">60</text>
+  <text x="860" y="356" font-size="24" text-anchor="middle">80</text>
+  <text x="490" y="390" font-size="24" text-anchor="middle">attenuation target, dB</text>
+  <text x="20" y="22" font-size="24">cost, relative to the 20 dB build</text>
+  <polyline
+    fill="none"
+    stroke-width="5"
+    points="80,317 210,314 340,309 470,298 600,270 730,202 860,40"
+  />
+  <line x1="600" y1="30" x2="600" y2="320" stroke-width="2" stroke-dasharray="4 8" />
+  <text x="606" y="24" font-size="24">last 20 dB</text>
+</svg>
+
+```notes
+Cost normalised to the 20 dB build, so the vertical axis is a multiple and
+not a currency: 1, 2, 4, 8, 18, 42, 100 at ten-decibel steps. Roughly a
+factor of 2.2 per 10 dB, which is what a convex curve looks like when every
+band's fix is harder to install than the last.
+
+The point of normalising is that the rooms differ and the shape does not.
+That is what the Bench compares between pairs.
+```
+
+---
+
+{/* _class: impact */}
+
+# The curve decides who pays
+
+A build to 80 dB costs five times a build to 60 dB. The last 20 dB is
+four-fifths of the bill.
+
+TEMPEST is still a government practice, not because the mechanism stayed
+secret — van Eck published in 1985 — but because nobody else was ever going
+to buy the right-hand end of the curve.
+
+---
+
+## Before the Bench
+
+Bring a stated attenuation target and the willingness to cost a room instead
+of capture one: mesh, seams, penetrations, door.
+
+The Bench asks for a bill of materials and one sentence separating what the
+room costs from what the device costs. Compare curves with another pair
+afterwards — your totals will disagree and your shapes should not.
