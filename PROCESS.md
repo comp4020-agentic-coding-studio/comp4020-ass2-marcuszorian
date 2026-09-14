@@ -2,19 +2,19 @@
 
 ## What I built
 
-SLOP1979, *Side Channels: What Machines Say Without Meaning To* — a
-twelve-week, image-free course teaching acoustic, electrical,
+SLOP4979, *Side Channels: What Machines Say Without Meaning To* — a
+twelve-week, image-free course teaching acoustic, power, timing,
 electromagnetic, cache, optical and thermal side channels as one compounding
 argument: a computer leaks information through channels nobody designed in,
 and the semester asks what noticing each one is worth. Three assessments
 (30/30/40) build from reading a single trace, to a full channel report, to a
-capstone design review that applies all twelve weeks' channels at once.
+capstone design review that applies the whole taxonomy to one device.
 
 ## How I got here
 
 The harness and brief came first: the starter arrived fixed, and the
 course-code commit [`b4cc573`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/b4cc573)
-fixed SLOP1979 before any content existed. Before writing anything I ran
+fixed the code before any content existed. Before writing anything I ran
 `pnpm check` and found it already red —
 [`29ff4c5`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/29ff4c5)'s
 own spec test asserted twelve dated sessions, weeks 1-12, and only two

@@ -46,7 +46,7 @@ harness is assessed. Carried forward from comp4020-crit5 (A game), trimmed to
 the rules that generalize --- the canvas/WebAudio/screenshot-sensor rules from
 that repo's game template didn't carry, since nothing here matches them.
 
-## The course: SLOP1979, Side Channels
+## The course: SLOP4979, Side Channels
 
 "Side Channels: What Machines Say Without Meaning To." The thesis, restated on
 every page that needs it: a computer leaks information through channels nobody

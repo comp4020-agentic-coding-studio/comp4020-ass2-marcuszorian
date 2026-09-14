@@ -1,4 +1,4 @@
-# Plan: decks and lecture verification for SLOP1979
+# Plan: decks and lecture verification for SLOP4979
 
 Working document, not a deliverable. Scope: the twelve weekly lectures, the
 slide decks, and the harness that keeps both honest. Everything below is
