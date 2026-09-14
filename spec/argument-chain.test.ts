@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -65,6 +65,13 @@ const parseCount = (token: string): number | undefined =>
 const CONTENT_ROOTS = ["src/content", "src/pages", "src/decks"];
 const EXTENSIONS = [".md", ".mdx", ".astro"];
 
+// PROCESS.md is not content and is not deployed, but it describes the course
+// to a marker in the course's own numbers --- and it was one of the four
+// places the channel count went wrong, sitting outside the roots above where
+// nothing could see it. A written account that miscounts the artefact it
+// accounts for is the same defect wherever it lives.
+const EXTRA_FILES = ["PROCESS.md"];
+
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((entry) => {
     const full = join(dir, entry);
@@ -73,10 +80,12 @@ function walk(dir: string): string[] {
   });
 }
 
-const files = CONTENT_ROOTS.flatMap((root) => walk(resolve(root))).map((file) => ({
-  path: file.replace(`${resolve(".")}/`, ""),
-  body: readFileSync(file, "utf8"),
-}));
+const files = [...CONTENT_ROOTS.flatMap((root) => walk(resolve(root))), ...EXTRA_FILES.map((file) => resolve(file))]
+  .filter((file) => existsSync(file))
+  .map((file) => ({
+    path: file.replace(`${resolve(".")}/`, ""),
+    body: readFileSync(file, "utf8"),
+  }));
 
 /**
  * Counts written in prose that assert a *total* rather than a subset.
