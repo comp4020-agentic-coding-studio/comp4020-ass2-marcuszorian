@@ -151,12 +151,26 @@ because week 6's Bench told students "the deck's outline names where to
 find both" when week 6 had no deck, which is a promise the site cannot
 keep. `spec/deck-policy.test.ts` enforces it.
 
-Every deck: at least six slides, at most 45 words on a content slide, opens
-on a question rather than a title card restating the lecture, carries at
-least one figure or table that is not bullets, and closes by naming what
-the Bench does with it. The word budget is a legibility proxy, not a
-substitute for opening the deck at both viewports and advancing every
-slide.
+Every deck: at least six slides, at most 70 words of prose on a slide,
+opens on a question rather than a title card restating the lecture, carries
+at least one figure or table that is not bullets, and closes by naming what
+the Bench does with it. Prose excludes tables, code, SVG and speaker notes
+--- those are scanned, not read, and counting them would penalise exactly
+the slides the figure rule asks for.
+
+**Whether a slide fits is a separate question, and only a browser can
+answer it.** The build's structural check reads parsed MDX and axe reads the
+DOM without reveal's CSS, so both are satisfied by a slide whose last three
+lines sit under the footer or whose figure is clipped at the right edge.
+`pnpm check:decks` lays each deck out on its real 1280x720 canvas and
+measures; it found three such failures the first time it ran, none of which
+looked wrong in the source. Run it after any deck change. It skips loudly
+when no Chrome is installed --- a skipped run is not a pass.
+
+The 70-word budget is a wall-of-text guard, deliberately set above what the
+decks currently measure. Tightening it to today's maximum would turn every
+later edit into a failure that teaches nothing, and it was 45 for one
+commit, which no deck in the repo could have met.
 
 ## Transient execution is out of scope, and says so
 
