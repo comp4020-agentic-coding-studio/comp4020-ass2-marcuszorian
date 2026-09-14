@@ -79,6 +79,37 @@ weakening, it's the wrong week.
 - **Sessions are labelled "Bench"** (`sessionLabels` in `site-config.ts`) ---
   the weekly hands-on measurement session, distinct from the lecture.
 
+## The argument chain: every week says what it changes
+
+Twelve weeks is twelve topics unless each one names what it does to the
+thesis. So every lecture carries a `claim:` --- one sentence, in the register
+above, saying what this week changes about the argument, not what it covers
+--- and no two weeks may claim the same change. The twelve claims render in
+order on `/lectures/`, which is where a marker reads the course as one
+argument rather than a grid of cards. A week you cannot write a distinct
+claim for is the week the course thesis says to delete.
+
+Each lecture also declares a `channel:`: one of the seven measured channels,
+or `none` for the weeks that do something to the accumulated list rather than
+extend it (week 1, week 9's precondition, and the three closing weeks). A
+channel is introduced in exactly one week.
+
+## Counts are derived, not typed
+
+**Never hand-write how many channels or axes the course has.** The number of
+channels is `channel:` frontmatter; the taxonomy is `axes:` data on the week
+that introduces it. Prose may state a total, but `spec/argument-chain.test.ts`
+checks every total against the data and fails on disagreement --- because it
+already went wrong once, silently, in four places at once: the week-10 lecture
+said six while enumerating six and dropping timing, its deck agreed with the
+wrong number, the week-8 Bench said six while listing seven Benches of notes,
+and the home page said twelve.
+
+The test reads a count as a *total* when it follows "the" or "all" or opens a
+line, so partitive prose ("four of them you can fill in from your notes")
+stays legal. Add a channel or an axis and the failures tell you every page
+that now lies.
+
 ## Harness changes are their own commits
 
 A new rule in this file, or a new script in `spec/`, is committed on its own,
