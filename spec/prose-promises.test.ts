@@ -24,6 +24,7 @@ interface ApiNode {
   id: string;
   type: string;
   title?: string;
+  description?: string;
   meta?: Record<string, unknown>;
 }
 
@@ -110,4 +111,128 @@ describe("prose promises the site can keep", () => {
     }
     expect([...new Set(offenders)]).toEqual([]);
   });
+});
+
+// The fourth member of the same family, and it caught a live overstatement:
+// the tutor's page said "Runs weeks 2, 6, 7, 8, 10 and 11, and most Benches"
+// with the same claim in its `description:`. The week list was exactly right.
+// Six Benches of twelve is half, not most --- the two teachers split them
+// evenly --- and nothing could see it, because the existing checks here read
+// decks, readings and assessment titles, and a teacher attribution is none of
+// those.
+//
+// It is the same defect shape as a count in prose: a number, or a word doing
+// the work of a number, hand-written next to data that can move. Reassign one
+// week's Bench and every quantity word on both people pages is a candidate
+// for being wrong.
+
+interface Person {
+  id: string;
+  slug: string;
+  name: string;
+  description: string;
+  body: string;
+  lectureWeeks: number[];
+  benchCount: number;
+}
+
+const weekOf = (node: ApiNode) => Number(node.meta?.week);
+const teachersOf = (node: ApiNode) =>
+  Array.isArray(node.meta?.teachers) ? (node.meta.teachers as string[]) : [];
+
+const people: Person[] = byType("people").map((node) => {
+  const slug = node.id.replace(/^people\//, "");
+  const source = files.find(({ path }) => path.endsWith(`/people/${slug}.md`))?.source ?? "";
+  // Frontmatter holds the description; the body is everything after it. Split
+  // so a quantity word is attributed to the half it actually appears in.
+  const body = source.replace(/^---[\s\S]*?\n---\n/, "");
+
+  return {
+    id: node.id,
+    slug,
+    name: node.title ?? slug,
+    description: node.description ?? "",
+    body,
+    lectureWeeks: byType("lectures")
+      .filter((lecture) => teachersOf(lecture).includes(slug))
+      .map(weekOf)
+      .sort((a, b) => a - b),
+    benchCount: byType("sessions").filter((session) => teachersOf(session).includes(slug)).length,
+  };
+});
+
+const benchTotal = byType("sessions").length;
+
+// Quantity words, as fractions of the whole, with the range each one may
+// honestly cover. "Most" means a majority, so half does not qualify; "half"
+// is checked with slack for an odd total.
+const QUANTITIES: Record<string, (part: number, total: number) => boolean> = {
+  all: (part, total) => part === total,
+  every: (part, total) => part === total,
+  most: (part, total) => part > total / 2,
+  half: (part, total) => Math.abs(part - total / 2) <= 0.5,
+  some: (part, total) => part > 0 && part < total,
+  several: (part) => part > 1,
+  few: (part, total) => part > 0 && part <= total / 4,
+  one: (part) => part === 1,
+  none: (part) => part === 0,
+  no: (part) => part === 0,
+};
+
+describe("people pages attribute what the data attributes", () => {
+  it("finds the people and the weeks they teach", () => {
+    // Vacuity guard: a renamed collection or a dropped `teachers:` key would
+    // otherwise make every assertion below trivially true.
+    expect(people.length).toBeGreaterThan(0);
+    expect(benchTotal).toBeGreaterThan(0);
+    for (const person of people) {
+      expect(person.body, `${person.slug}.md was not found on disk`).not.toBe("");
+      expect(
+        person.lectureWeeks.length,
+        `${person.slug} teaches no lecture, so no week list can be checked`,
+      ).toBeGreaterThan(0);
+    }
+  });
+
+  for (const person of people) {
+    it(`${person.name} enumerates only the weeks they teach`, () => {
+      // A sentence like "Runs weeks 2, 6, 7, 8, 10 and 11" is a complete
+      // enumeration, so it has to match the edges exactly --- both directions:
+      // a week claimed but not taught, and a week taught but not claimed.
+      const prose = `${person.description}\n${person.body}`;
+      const lists = [
+        ...prose.matchAll(/\bweeks\s+((?:\d+\s*(?:,|and|&)\s*)+\d+)/gi),
+      ].map((match) => match[1]);
+
+      for (const list of lists) {
+        const claimed = [...list.matchAll(/\d+/g)].map((digits) => Number(digits[0])).sort((a, b) => a - b);
+        expect(
+          claimed,
+          `${person.slug} says it runs weeks ${claimed.join(", ")}; ` +
+            `\`teachers:\` puts them on ${person.lectureWeeks.join(", ")}`,
+        ).toEqual(person.lectureWeeks);
+      }
+    });
+
+    it(`${person.name} quantifies Benches consistently with the count`, () => {
+      const prose = `${person.description}\n${person.body}`;
+      const words = Object.keys(QUANTITIES).join("|");
+      // The quantity word may be separated from "Bench" by a few words of
+      // qualification --- "most of the weekly Bench sessions" --- so allow a
+      // short gap rather than requiring adjacency.
+      const pattern = new RegExp(`\\b(${words})\\b(?:\\s+\\w+){0,3}?\\s+(?:Bench|Benches)\\b`, "gi");
+
+      const offenders: string[] = [];
+      for (const [phrase, word] of prose.matchAll(pattern)) {
+        const holds = QUANTITIES[word.toLowerCase()]!;
+        if (!holds(person.benchCount, benchTotal)) {
+          offenders.push(
+            `"${phrase.trim()}" — ${person.slug} teaches ${person.benchCount} of ${benchTotal} Benches`,
+          );
+        }
+      }
+
+      expect(offenders).toEqual([]);
+    });
+  }
 });

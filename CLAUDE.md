@@ -224,9 +224,18 @@ exists. Three of them were wrong at once: week 6's Bench sent students to
 readings" when the site publishes no readings, and four pages named
 "Assignment 1", which is not the title of anything here.
 
+A fourth turned up later, and it is the same defect wearing different
+clothes: the tutor's page claimed "most Benches" when `teachers:` splits the
+twelve evenly, six each. The week list printed beside it was exactly right,
+which is what made the sentence look checked. So an attribution counts as a
+promise too --- who teaches what is data, and prose about it is prose about
+data that can move.
+
 So: name an assessment by its `title`, never "Assignment N"; refer to
-another week's Bench, deck or lecture only when that week has one; and
-gesture at readings only where `readings:` is declared.
+another week's Bench, deck or lecture only when that week has one; gesture at
+readings only where `readings:` is declared; and if a people page enumerates
+weeks or quantifies Benches, the enumeration must match that person's
+`teachers:` edges exactly and the quantity word must survive the count.
 `spec/prose-promises.test.ts` reads the assertion out of the prose and
 checks it against the API. The deck half of the same contract lives in
 `spec/deck-policy.test.ts`, with the rest of the deck rules.
