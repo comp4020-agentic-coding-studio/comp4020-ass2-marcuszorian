@@ -1,0 +1,62 @@
+---
+title: Reading a power trace
+description:
+  One modular exponentiation, traced, so a single squaring and a single
+  multiply are visible before the Bench asks you to find them yourself
+---
+
+# Reading a power trace
+
+A smart card computing `c^d mod n` one bit of `d` at a time. What does its
+current draw look like while it does that?
+
+---
+
+## The trace, unlabelled
+
+A repeating shape, roughly periodic, with an occasional wider bump breaking
+the rhythm. Nothing here is labelled yet — that is the point of looking at
+it once before knowing what to look for.
+
+---
+
+## The algorithm behind it
+
+```
+result = 1
+for bit in d (high to low):
+    result = result * result mod n      # always happens
+    if bit == 1:
+        result = result * c mod n       # only on a 1-bit
+```
+
+Every loop iteration squares. Only a 1-bit also multiplies.
+
+---
+
+## The trace, labelled
+
+Each repeating shape is one squaring. The wider bumps are a squaring
+immediately followed by a multiply — which happens exactly on the bits of
+`d` that are 1.
+
+Read the trace again. The key is now visible by eye, one bit at a time.
+
+---
+
+{/* _class: impact */}
+
+# One trace was enough here
+
+Because this implementation never varied its own timing or shape by
+anything but the secret bit. Real implementations try hard not to be this
+readable — which is exactly why differential power analysis exists: average
+enough traces, and even a much smaller, noisier difference survives.
+
+---
+
+## Before the Bench
+
+Bring the habit of reading a trace as a sequence of operations, not a
+waveform. Assignment 1 supplies a trace from a program that does not make it
+this easy.

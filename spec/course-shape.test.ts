@@ -39,6 +39,19 @@ describe("teaching weeks", () => {
   });
 });
 
+describe("teaching weeks", () => {
+  it("runs a dated lecture across all twelve teaching weeks", () => {
+    const lectures = api.nodes.filter((node) => node.type === "lectures");
+    const weeks = lectures
+      .map((node) => node.meta?.week)
+      .filter((week): week is number => typeof week === "number")
+      .sort((a, b) => a - b);
+    expect(weeks, "one lecture per week, weeks 1-12").toEqual(
+      Array.from({ length: 12 }, (_, i) => i + 1),
+    );
+  });
+});
+
 describe("lectures and decks", () => {
   it("has at least one lecture linked to a deck that actually builds", () => {
     const lectures = api.nodes.filter((node) => node.type === "lectures");

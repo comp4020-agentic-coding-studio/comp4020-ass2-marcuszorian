@@ -1,0 +1,69 @@
+---
+title: The leakage taxonomy
+description:
+  Six channels, six weeks, one rubric — and the mutual-information estimate
+  that turns "it leaks" into a number
+---
+
+# The leakage taxonomy
+
+Six weeks, six channels, six disclosures. This lecture is the first time the
+course asks you to compare them instead of adding a seventh.
+
+---
+
+## The six axes
+
+- physical medium (sound, current, EM, cache timing, light, heat)
+- attacker proximity required
+- available during computation, or only after
+- information per measurement, versus measurements required
+- cost to close
+- (new, this week) bits of the secret actually recoverable
+
+---
+
+{/* _class: centered */}
+
+## "It leaks" is not a number
+
+Every channel covered so far was shown to leak *something*. None of those
+demonstrations said *how much*, in bits, under realistic noise. That gap is
+what this lecture closes.
+
+---
+
+## Mutual information, briefly
+
+For a secret `S` and a measurement `M` of it:
+
+```
+I(S; M) = H(S) - H(S | M)
+```
+
+How much uncertainty about `S` remains, on average, once you know `M`. Zero
+means the channel told you nothing. `H(S)` means it told you everything.
+
+---
+
+## Placing channels on the taxonomy
+
+| Channel | Proximity | Available | Bits / trace |
+|---|---|---|---|
+| Acoustic (wk 2) | same room | during | low, needs many |
+| Power (wk 3) | physical contact | during | high, few traces |
+| Cache (wk 6) | shared core | during | medium |
+| Thermal (wk 8) | none, after the fact | after only | low, decays with time |
+
+Fill in the rest from your own Bench notes. There is no single correct
+ranking — that is what the Bench and the capstone both test.
+
+---
+
+{/* _class: impact */}
+
+# A number a defender can act on
+
+"This channel leaks 0.2 bits per trace and needs physical access" and "this
+channel leaks 6 bits per trace over the network" are not the same
+engineering problem, even though both are, technically, side channels.

@@ -46,17 +46,19 @@ export const slopCourseMetaSchema = z
 // The code's last three digits were assigned to this repo when it was
 // provisioned, and no other course in the cohort has them. Change the first
 // digit to your course's level (and `level` to match); keep the other three.
-// STARTER_CONTENT: replace this course record, then remove this comment.
 export const courseMeta = slopCourseMetaSchema.parse({
   code: "SLOP1979",
-  title: "Course Title Goes Here",
+  title: "Side Channels: What Machines Say Without Meaning To",
   session: "Semester 1",
   year: 2027,
   level: 1,
   startDate: "2027-02-22",
   endDate: "2027-05-28",
   description:
-    "One concise paragraph explaining what this course is, who it is for, " +
-    "and why somebody would choose to spend a semester taking it.",
-  tags: ["replace me"],
+    "A semester on what computers reveal about themselves without meaning " +
+    "to: the sound, current, heat, timing and light a machine leaks while " +
+    "it works, and what a defender does once they've noticed. No " +
+    "electronics or cryptography background assumed; the course builds " +
+    "what it needs as it goes.",
+  tags: ["side channels", "hardware security", "signal analysis"],
 }) satisfies CourseMetaInput;
