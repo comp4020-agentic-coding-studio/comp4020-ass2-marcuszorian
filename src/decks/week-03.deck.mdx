@@ -14,9 +14,42 @@ current draw look like while it does that?
 
 ## The trace, unlabelled
 
-A repeating shape, roughly periodic, with an occasional wider bump breaking
-the rhythm. Nothing here is labelled yet — that is the point of looking at
-it once before knowing what to look for.
+<svg
+  viewBox="0 0 1020 400"
+  width="100%"
+  role="img"
+  stroke="currentColor"
+  fill="currentColor"
+>
+  <title>
+    Eleven bumps in supply current, roughly periodic, four of them following
+    another closely enough to read as one wider group
+  </title>
+  <line x1="70" y1="300" x2="940" y2="300" stroke-width="2" />
+  <polyline
+    fill="none"
+    stroke-width="4"
+    points="70,300 90,300 98,140 142,140 150,300 160,300 168,140 192,140 200,300 228,300 236,140 280,140 288,300 316,300 324,140 368,140 376,300 386,300 394,140 418,140 426,300 454,300 462,140 506,140 514,300 524,300 532,140 556,140 564,300 592,300 600,140 644,140 652,300 680,300 688,140 732,140 740,300 768,300 776,140 820,140 828,300 838,300 846,140 870,140 878,300 900,300"
+  />
+  <text x="505" y="352" font-size="26" text-anchor="middle">time</text>
+  <text x="20" y="30" font-size="26">supply current</text>
+</svg>
+
+Nothing here is labelled yet — that is the point of looking once before
+knowing what to look for.
+
+```notes
+Envelope of supply current across one exponentiation, plotted from the
+measured operation sequence rather than the raw sample stream:
+
+- each plateau sits 14 mA above the idle baseline
+- a squaring holds that plateau for 60 µs, a multiply for 40 µs
+- 10 µs separates a multiply from the squaring before it; 28 µs separates
+  one loop iteration from the next
+
+Eleven plateaux in total. That number is the thing to notice before the next
+slide explains it, because it is not seven.
+```
 
 ---
 
@@ -36,11 +69,52 @@ Every loop iteration squares. Only a 1-bit also multiplies.
 
 ## The trace, labelled
 
-Each repeating shape is one squaring. The wider bumps are a squaring
-immediately followed by a multiply — which happens exactly on the bits of
-`d` that are 1.
+<svg
+  viewBox="0 0 1020 400"
+  width="100%"
+  role="img"
+  stroke="currentColor"
+  fill="currentColor"
+>
+  <title>
+    The same eleven bumps, each marked as a squaring or a multiply; the four
+    squaring-and-multiply pairs fall exactly on the 1 bits of the exponent
+  </title>
+  <line x1="70" y1="300" x2="940" y2="300" stroke-width="2" />
+  <polyline
+    fill="none"
+    stroke-width="4"
+    points="70,300 90,300 98,140 142,140 150,300 160,300 168,140 192,140 200,300 228,300 236,140 280,140 288,300 316,300 324,140 368,140 376,300 386,300 394,140 418,140 426,300 454,300 462,140 506,140 514,300 524,300 532,140 556,140 564,300 592,300 600,140 644,140 652,300 680,300 688,140 732,140 740,300 768,300 776,140 820,140 828,300 838,300 846,140 870,140 878,300 900,300"
+  />
+  <text x="120" y="336" font-size="26" text-anchor="middle">S</text>
+  <text x="180" y="336" font-size="26" text-anchor="middle">M</text>
+  <text x="258" y="336" font-size="26" text-anchor="middle">S</text>
+  <text x="346" y="336" font-size="26" text-anchor="middle">S</text>
+  <text x="406" y="336" font-size="26" text-anchor="middle">M</text>
+  <text x="484" y="336" font-size="26" text-anchor="middle">S</text>
+  <text x="544" y="336" font-size="26" text-anchor="middle">M</text>
+  <text x="622" y="336" font-size="26" text-anchor="middle">S</text>
+  <text x="710" y="336" font-size="26" text-anchor="middle">S</text>
+  <text x="798" y="336" font-size="26" text-anchor="middle">S</text>
+  <text x="858" y="336" font-size="26" text-anchor="middle">M</text>
+  <text x="145" y="100" font-size="30" text-anchor="middle">1</text>
+  <text x="258" y="100" font-size="30" text-anchor="middle">0</text>
+  <text x="371" y="100" font-size="30" text-anchor="middle">1</text>
+  <text x="509" y="100" font-size="30" text-anchor="middle">1</text>
+  <text x="622" y="100" font-size="30" text-anchor="middle">0</text>
+  <text x="710" y="100" font-size="30" text-anchor="middle">0</text>
+  <text x="823" y="100" font-size="30" text-anchor="middle">1</text>
+  <text x="20" y="30" font-size="26">bits of d, high to low</text>
+</svg>
 
-Read the trace again. The key is now visible by eye, one bit at a time.
+The key is now readable by eye, one bit at a time.
+
+```notes
+Same trace, same numbers. Seven loop iterations, eleven plateaux: every
+iteration squares, and the four that also multiply are the 1 bits.
+
+The exponent read off the top row is 1011001.
+```
 
 ---
 
