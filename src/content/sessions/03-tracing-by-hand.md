@@ -33,6 +33,7 @@ operations rather than as noise.
 
 ## Afterwards
 
-Keep your annotated trace. Assignment 1 supplies a new, unannotated one from a
+Keep your annotated trace. The Trace Analysis Lab supplies a new, unannotated
+one from a
 different program and asks you to do this again without a lecture walking you
 through it first.

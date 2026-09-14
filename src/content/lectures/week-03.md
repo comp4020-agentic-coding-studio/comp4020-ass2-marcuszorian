@@ -32,8 +32,8 @@ method: a single trace is close to unreadable by eye once the device is
 doing real work, but the statistical correlation across thousands of traces
 turns noise into signal in a way no single measurement could. This week's
 deck walks through one trace slowly enough to see the shape a single squaring
-operation and a single multiply produce, before the Bench and Assignment 1
-ask you to do the harder version — many traces, added together — yourself.
+operation and a single multiply produce, before the Bench and the Trace
+Analysis Lab ask you to do the harder version — many traces, added together — yourself.
 
 ## Outline
 

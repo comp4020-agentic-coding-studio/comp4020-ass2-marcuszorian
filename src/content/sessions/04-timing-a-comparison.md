@@ -33,6 +33,7 @@ measurements lie, and the statistics are not decoration.
 
 ## Afterwards
 
-Assignment 1 is due this week. It asks you to do the same kind of reading —
+The Trace Analysis Lab is due this week. It asks you to do the same kind of
+reading —
 trace to mechanism to conclusion — on material you have not seen annotated in
 advance.

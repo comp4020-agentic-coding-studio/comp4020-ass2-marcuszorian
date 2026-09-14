@@ -18,8 +18,9 @@ spec:
 
 ## Before the Bench
 
-Read the placement-checking section of the week's readings before arriving —
-this Bench works from supplied data rather than a live cloud account.
+Read the placement sections of Ristenpart et al., 2009 — the internal-IP map
+and the round-trip-time check, not the extraction results — before arriving.
+This Bench works from supplied data rather than a live cloud account.
 
 ## In the Bench
 
