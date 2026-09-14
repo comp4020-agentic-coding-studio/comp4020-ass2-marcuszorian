@@ -13,6 +13,27 @@ teachers:
   - marisol-quaye
 related:
   - sessions/05-shielding-a-room
+readings:
+  - authors: Wim van Eck
+    year: 1985
+    title: >-
+      Electromagnetic Radiation from Video Display Units: An Eavesdropping
+      Risk?
+    venue: Computers & Security 4(4), 269-286
+    url: https://doi.org/10.1016/0167-4048(85)90046-X
+  - authors: Jean-Jacques Quisquater and David Samyde
+    year: 2001
+    title: >-
+      ElectroMagnetic Analysis (EMA): Measures and Counter-Measures for
+      Smart Cards
+    venue: E-smart 2001, LNCS 2140, 200-210
+    url: https://doi.org/10.1007/3-540-45418-7_17
+  - authors: Markus G. Kuhn
+    year: 2003
+    title: >-
+      Compromising Emanations: Eavesdropping Risks of Computer Displays
+    venue: University of Cambridge Technical Report UCAM-CL-TR-577
+    url: https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-577.html
 ---
 
 Every video display, from a cathode-ray tube to a modern digital interface,

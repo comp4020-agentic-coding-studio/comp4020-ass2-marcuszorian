@@ -13,6 +13,21 @@ teachers:
   - marisol-quaye
 related:
   - sessions/09-sharing-a-tenant
+readings:
+  - authors: Thomas Ristenpart, Eran Tromer, Hovav Shacham and Stefan Savage
+    year: 2009
+    title: >-
+      Hey, You, Get Off of My Cloud: Exploring Information Leakage in
+      Third-Party Compute Clouds
+    venue: ACM CCS 2009, 199-212
+    url: https://doi.org/10.1145/1653662.1653687
+  - authors: Venkatanathan Varadarajan, Yinqian Zhang, Thomas Ristenpart and
+      Michael Swift
+    year: 2015
+    title: >-
+      A Placement Vulnerability Study in Multi-Tenant Public Clouds
+    venue: USENIX Security 2015, 913-928
+    url: https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/varadarajan
 ---
 
 This week introduces no new channel, which is the reason it exists. Every

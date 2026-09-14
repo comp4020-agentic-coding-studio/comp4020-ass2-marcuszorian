@@ -13,6 +13,25 @@ teachers:
   - idris-fenn
 related:
   - sessions/02-listening-for-keys
+readings:
+  - authors: Dmitri Asonov and Rakesh Agrawal
+    year: 2004
+    title: >-
+      Keyboard Acoustic Emanations
+    venue: IEEE Symposium on Security and Privacy 2004, 3-11
+    url: https://doi.org/10.1109/SECPRI.2004.1301311
+  - authors: Li Zhuang, Feng Zhou and J. D. Tygar
+    year: 2005
+    title: >-
+      Keyboard Acoustic Emanations Revisited
+    venue: ACM CCS 2005, 373-382
+    url: https://doi.org/10.1145/1102120.1102169
+  - authors: Daniel Genkin, Adi Shamir and Eran Tromer
+    year: 2014
+    title: >-
+      RSA Key Extraction via Low-Bandwidth Acoustic Cryptanalysis
+    venue: CRYPTO 2014, LNCS 8616, 444-461
+    url: https://doi.org/10.1007/978-3-662-44371-2_25
 ---
 
 Every key on a mechanical or membrane keyboard produces a slightly different

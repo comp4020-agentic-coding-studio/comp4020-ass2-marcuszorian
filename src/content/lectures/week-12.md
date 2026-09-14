@@ -15,6 +15,27 @@ teachers:
 related:
   - sessions/12-defending-a-design
   - assessments/capstone-design-review
+readings:
+  - authors: Qian Ge, Yuval Yarom, David Cock and Gernot Heiser
+    year: 2018
+    title: >-
+      A Survey of Microarchitectural Timing Attacks and Countermeasures on
+      Contemporary Hardware
+    venue: Journal of Cryptographic Engineering 8(1), 1-27
+    url: https://doi.org/10.1007/s13389-016-0141-6
+  - authors: Francois-Xavier Standaert, Tal G. Malkin and Moti Yung
+    year: 2009
+    title: >-
+      A Unified Framework for the Analysis of Side-Channel Key Recovery
+      Attacks
+    venue: EUROCRYPT 2009, LNCS 5479, 443-461
+    url: https://doi.org/10.1007/978-3-642-01001-9_26
+  - authors: Ross Anderson
+    year: 2020
+    title: >-
+      Security Engineering, third edition, chapter 19: Side Channels
+    venue: Wiley
+    url: https://www.cl.cam.ac.uk/~rja14/book.html
 ---
 
 No device is threatened by every channel this course has covered, and no

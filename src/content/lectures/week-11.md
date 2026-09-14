@@ -14,6 +14,27 @@ teachers:
   - idris-fenn
 related:
   - sessions/11-rewriting-for-constant-time
+readings:
+  - authors: Daniel J. Bernstein
+    year: 2005
+    title: >-
+      Cache-timing attacks on AES
+    venue: Technical report, University of Illinois at Chicago
+    url: https://cr.yp.to/antiforgery/cachetiming-20050414.pdf
+  - authors: Jose Bacelar Almeida, Manuel Barbosa, Gilles Barthe, Francois
+      Dupressoir and Michael Emmi
+    year: 2016
+    title: >-
+      Verifying Constant-Time Implementations
+    venue: USENIX Security 2016, 53-70
+    url: https://www.usenix.org/conference/usenixsecurity16/technical-sessions/presentation/almeida
+  - authors: Jean-Sebastien Coron
+    year: 1999
+    title: >-
+      Resistance Against Differential Power Analysis for Elliptic Curve
+      Cryptosystems
+    venue: CHES 1999, LNCS 1717, 292-302
+    url: https://doi.org/10.1007/3-540-48059-5_25
 ---
 
 Closing a timing channel is not the same task as detecting one. Daniel

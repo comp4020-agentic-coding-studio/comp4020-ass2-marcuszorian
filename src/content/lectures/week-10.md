@@ -27,6 +27,27 @@ teachers:
 slides: /decks/week-10/
 related:
   - sessions/10-scoring-a-leak
+readings:
+  - authors: Francois-Xavier Standaert, Tal G. Malkin and Moti Yung
+    year: 2009
+    title: >-
+      A Unified Framework for the Analysis of Side-Channel Key Recovery
+      Attacks
+    venue: EUROCRYPT 2009, LNCS 5479, 443-461
+    url: https://doi.org/10.1007/978-3-642-01001-9_26
+  - authors: Suresh Chari, Josyula R. Rao and Pankaj Rohatgi
+    year: 2002
+    title: >-
+      Template Attacks
+    venue: CHES 2002, LNCS 2523, 13-28
+    url: https://doi.org/10.1007/3-540-36400-5_3
+  - authors: Qian Ge, Yuval Yarom, David Cock and Gernot Heiser
+    year: 2018
+    title: >-
+      A Survey of Microarchitectural Timing Attacks and Countermeasures on
+      Contemporary Hardware
+    venue: Journal of Cryptographic Engineering 8(1), 1-27
+    url: https://doi.org/10.1007/s13389-016-0141-6
 ---
 
 Weeks 2 through 8 each argued one channel on its own terms, and were built

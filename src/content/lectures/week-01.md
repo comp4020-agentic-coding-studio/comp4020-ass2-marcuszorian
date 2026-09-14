@@ -13,6 +13,20 @@ teachers:
   - marisol-quaye
 related:
   - sessions/01-noticing-a-leak
+readings:
+  - authors: Paul C. Kocher
+    year: 1996
+    title: >-
+      Timing Attacks on Implementations of Diffie-Hellman, RSA, DSS, and
+      Other Systems
+    venue: CRYPTO '96, LNCS 1109, 104-113
+    url: https://doi.org/10.1007/3-540-68697-5_9
+  - authors: Butler W. Lampson
+    year: 1973
+    title: >-
+      A Note on the Confinement Problem
+    venue: Communications of the ACM 16(10), 613-615
+    url: https://doi.org/10.1145/362375.362389
 ---
 
 A computation has an intended output and, almost always, a second set of

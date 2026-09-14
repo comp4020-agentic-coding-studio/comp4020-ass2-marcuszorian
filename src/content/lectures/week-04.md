@@ -15,6 +15,19 @@ teachers:
 related:
   - sessions/04-timing-a-comparison
   - assessments/trace-analysis-lab
+readings:
+  - authors: David Brumley and Dan Boneh
+    year: 2003
+    title: >-
+      Remote Timing Attacks are Practical
+    venue: USENIX Security 2003
+    url: https://www.usenix.org/legacy/events/sec03/tech/brumley.html
+  - authors: Scott A. Crosby, Dan S. Wallach and Rudolf H. Riedi
+    year: 2009
+    title: >-
+      Opportunities and Limits of Remote Timing Attacks
+    venue: ACM TISSEC 12(3), article 17
+    url: https://doi.org/10.1145/1455526.1455530
 ---
 
 This week has two mechanisms, deliberately, because the obvious one and the

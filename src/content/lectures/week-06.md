@@ -14,6 +14,26 @@ teachers:
   - idris-fenn
 related:
   - sessions/06-mapping-a-shared-cache
+readings:
+  - authors: Yuval Yarom and Katrina Falkner
+    year: 2014
+    title: >-
+      FLUSH+RELOAD: A High Resolution, Low Noise, L3 Cache Side-Channel
+      Attack
+    venue: USENIX Security 2014, 719-732
+    url: https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/yarom
+  - authors: Dag Arne Osvik, Adi Shamir and Eran Tromer
+    year: 2006
+    title: >-
+      Cache Attacks and Countermeasures: The Case of AES
+    venue: CT-RSA 2006, LNCS 3860, 1-20
+    url: https://doi.org/10.1007/11605805_1
+  - authors: Colin Percival
+    year: 2005
+    title: >-
+      Cache Missing for Fun and Profit
+    venue: BSDCan 2005
+    url: https://www.daemonology.net/papers/cachemissing.pdf
 ---
 
 A processor's cache is shared between every process running on it, and a

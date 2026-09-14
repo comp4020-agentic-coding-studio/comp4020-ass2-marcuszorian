@@ -14,6 +14,27 @@ teachers:
 related:
   - sessions/08-timing-a-decay
   - assessments/channel-report
+readings:
+  - authors: Julien Brouchier, Tom Kean, Carol Marsh and David Naccache
+    year: 2009
+    title: >-
+      Temperature Attacks
+    venue: IEEE Security & Privacy 7(2), 79-82
+    url: https://doi.org/10.1109/MSP.2009.54
+  - authors: Keaton Mowery, Sarah Meiklejohn and Stefan Savage
+    year: 2011
+    title: >-
+      Heat of the Moment: Characterizing the Efficacy of Thermal
+      Camera-Based Attacks
+    venue: USENIX WOOT 2011
+    url: https://www.usenix.org/conference/woot11/heat-moment-characterizing-efficacy-thermal-camera-based-attacks
+  - authors: Ramya Jayaram Masti, Devendra Rai, Aanjhan Ranganathan,
+      Christian Mueller, Lothar Thiele and Srdjan Capkun
+    year: 2015
+    title: >-
+      Thermal Covert Channels on Multi-core Platforms
+    venue: USENIX Security 2015, 865-880
+    url: https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/masti
 ---
 
 A fingertip warms a key it presses, and the key stays measurably warmer than

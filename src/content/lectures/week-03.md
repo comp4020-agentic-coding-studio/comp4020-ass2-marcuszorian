@@ -15,6 +15,26 @@ teachers:
 slides: /decks/week-03/
 related:
   - sessions/03-tracing-by-hand
+readings:
+  - authors: Paul Kocher, Joshua Jaffe and Benjamin Jun
+    year: 1999
+    title: >-
+      Differential Power Analysis
+    venue: CRYPTO '99, LNCS 1666, 388-397
+    url: https://doi.org/10.1007/3-540-48405-1_25
+  - authors: Suresh Chari, Charanjit S. Jutla, Josyula R. Rao and Pankaj
+      Rohatgi
+    year: 1999
+    title: >-
+      Towards Sound Approaches to Counteract Power-Analysis Attacks
+    venue: CRYPTO '99, LNCS 1666, 398-412
+    url: https://doi.org/10.1007/3-540-48405-1_26
+  - authors: Stefan Mangard, Elisabeth Oswald and Thomas Popp
+    year: 2007
+    title: >-
+      Power Analysis Attacks: Revealing the Secrets of Smart Cards
+    venue: Springer, chapters 6-9 on countermeasures
+    url: https://doi.org/10.1007/978-0-387-38162-6
 ---
 
 A transistor draws a different amount of current depending on whether it
