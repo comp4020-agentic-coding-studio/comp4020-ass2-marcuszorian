@@ -8,8 +8,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "astro check",
-    "check": "pnpm typecheck && pnpm test && pnpm check:decks",
+    "check": "pnpm typecheck && pnpm test && pnpm check:decks && pnpm check:viewports",
     "check:decks": "node scripts/check-decks.ts",
+    "check:viewports": "node scripts/check-viewports.ts",
     "check:evidence": "node scripts/check-evidence.ts",
     "test": "pnpm build && vitest run spec",
     "test:template": "vitest run scripts"

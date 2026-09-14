@@ -251,9 +251,28 @@ A new rule in this file, or a new script in `spec/`, is committed on its own,
 separate from the content change it protects --- so `PROCESS.md` can cite the
 harness decision and the content it produced as two separate, legible facts.
 
-## Link and focus styling
+## Link and focus styling, and it is measured
 
 No default browser blue box or heavy outline around text links. Keyboard
 focus must still be clearly visible (a visible `:focus-visible` treatment,
 never `outline: none` with nothing replacing it) --- check both link states in
 a real browser, at both marking viewports, not just via axe.
+
+That was the whole rule for most of this build: prose, with no instrument
+behind it, satisfied only by what the theme happens to do in its own
+`base.css`. It held every time it was checked by hand, which is exactly the
+problem --- a rule kept by someone else's default breaks silently on a
+dependency bump, and neither existing sensor can see it. Axe reads the resting
+state and never presses Tab; `:focus-visible` only computes when something is
+focused by keyboard.
+
+So `pnpm check:viewports` measures it, on every page type at 1920x1080 and
+390x844: nothing scrolls horizontally, the skip link leads the tab order and
+stops being `visually-hidden` while focused, and the first link inside
+`<main>` --- reached by real Tab presses --- draws an outline at a non-zero
+offset in the brand accent. The accent is read back out of the page's own
+`--at-accent` rather than hardcoded, so the check measures the ring against
+the brand instead of against a hex string typed into a script once. Decks are
+out of scope; `check:decks` already measures those on their real canvas.
+
+It skips loudly without Chrome --- a skipped run is not a pass.
