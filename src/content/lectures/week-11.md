@@ -9,6 +9,7 @@ claim: >-
   Detecting a leak and closing one are different skills, and a rewrite that
   only makes a channel harder to see is not a fix.
 channel: none
+slides: /decks/week-11/
 teachers:
   - idris-fenn
 related:

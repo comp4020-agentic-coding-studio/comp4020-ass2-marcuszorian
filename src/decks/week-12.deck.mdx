@@ -1,0 +1,131 @@
+---
+title: Six moves
+description:
+  The design method run once, in full, against one stated device and one
+  stated adversary — which is what the capstone asks for
+---
+
+# Six moves
+
+Seven channels are real. A defender has budget for two of them. Which two,
+and how would you defend the choice to somebody who disagrees?
+
+---
+
+## The method
+
+1. State the device.
+2. State the adversary — proximity, dwell time, budget.
+3. Rule out the channels that adversary cannot reach.
+4. Rank what survives: rate against cost to close.
+5. Name what you are choosing not to defend.
+6. Say what would change your mind.
+
+---
+
+## Move 1 — the device
+
+A battery-powered hotel door lock. Four-digit PIN on a plastic membrane
+keypad, code rotated per stay, verified on a microcontroller inside the
+door, no network.
+
+Housing is screwed shut and its screws are inside the room.
+
+---
+
+## Move 2 — the adversary
+
+The guest in the next room. Corridor access for a few minutes at a time, a
+phone, no tools. They cannot open the housing, cannot run code on the
+microcontroller, and will not stand there for an hour.
+
+Everything below follows from those four sentences.
+
+---
+
+## Move 3 — ruling out
+
+| Channel | Reachable? | Because |
+|---|---|---|
+| Power (wk 3) | no | needs contact with the board, housing is shut |
+| Cache (wk 6) | no | needs code running on the same processor |
+| EM (wk 5) | no | needs a receiver and dwell time the corridor denies |
+
+Three of seven are gone, and none of them were ruled out by a
+countermeasure. The adversary statement did it.
+
+---
+
+## Move 4 — ranking what survives
+
+| Channel | Rate | Cost to close |
+|---|---|---|
+| Thermal (wk 8) | set of digits, order decays in ~60 s | brushed metal keypad, at manufacture |
+| Acoustic (wk 2) | per-key, needs a quiet corridor | silent membrane, cheap |
+| Optical (wk 7) | full PIN, needs line of sight | recessed keypad, cheap |
+| Timing (wk 4) | none — no remote interface to time | already closed |
+
+---
+
+{/* _class: centered */}
+
+## The ranking is not the rate column
+
+Thermal leaks less than optical and is first anyway, because the fix is a
+purchasing decision made once, years before the attack, and cannot be
+retrofitted to an installed lock.
+
+Cheap to exploit, expensive to close. That is week 10's divergence, on one
+device.
+
+---
+
+## Move 5 — what is not defended
+
+An adversary who opens the housing gets the power channel and this design
+does not stop them. Stated, not hidden: the lock assumes the corridor, not
+the workshop.
+
+A design review that admits no residual risk has not finished.
+
+---
+
+## Move 6 — what would change your mind
+
+- If the PIN check moves to Bluetooth, timing returns to the top of the list.
+- If the keypad ships in brushed metal, thermal leaves it.
+- If the corridor gets a camera, optical is somebody else's problem already.
+
+Each is a fact about the device, not an opinion about the ranking.
+
+---
+
+## Two ways this goes wrong
+
+**An adversary stated so loosely every channel applies.** "A determined
+attacker" rules nothing out, so move 3 does no work and the ranking is
+seven rows of guesswork.
+
+**A ranking with no residual risk admitted.** Move 5 is the one people skip.
+
+---
+
+## Where the method stops
+
+Week 9: the cheapest defence is often not on the channel list at all.
+Rotating the code per stay already caps what any of these channels is worth
+— it is the lock's colocation defence, and it defends all four at once.
+
+Look for that move before ranking. Sometimes it is the whole answer.
+
+---
+
+{/* _class: impact */}
+
+# Real is not the same question as worth defending
+
+The second one is what an engineer is paid to answer, and it needs a device
+and an adversary before it means anything.
+
+This Bench runs the six moves on your draft, out loud, against one sceptical
+peer — before the capstone runs them against a marker.

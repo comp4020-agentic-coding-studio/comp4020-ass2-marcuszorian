@@ -9,6 +9,7 @@ claim: >-
   No defender closes every channel, so the semester's output is a method for
   deciding which ones a stated device and adversary make worth closing.
 channel: none
+slides: /decks/week-12/
 teachers:
   - marisol-quaye
 related:

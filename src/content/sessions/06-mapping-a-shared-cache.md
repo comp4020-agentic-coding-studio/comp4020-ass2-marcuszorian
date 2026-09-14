@@ -18,7 +18,9 @@ spec:
 ## Before the Bench
 
 Confirm your machine's cache line size and roughly how many cycles separate a
-hit from a miss on it — the deck's outline names where to find both.
+hit from a miss on it — the deck names where to find both. Your own numbers
+will not match the deck's histogram, and the gap between the two clusters is
+narrower on a loaded machine than on an idle one.
 
 ## In the Bench
 

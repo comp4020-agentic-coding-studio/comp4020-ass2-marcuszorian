@@ -1,0 +1,140 @@
+---
+title: Flush, wait, reload
+description:
+  The three-step primitive one step at a time, the histogram that makes it
+  work, and the two preconditions the rest of the course inherits
+---
+
+# Flush, wait, reload
+
+You can time your own memory accesses. Nothing privileged about that. What
+does it tell you about what somebody else's process just did?
+
+---
+
+## Step 1 — flush
+
+Evict one named line of memory from the cache. Not the victim's copy: the
+shared copy, the one both processes are reading because the operating system
+mapped the same physical page into both.
+
+Afterwards, nobody's cache holds it.
+
+---
+
+## Step 2 — wait
+
+Let the victim run for a fixed interval, then stop waiting.
+
+The interval is the resolution. Too long and several accesses collapse into
+one observation; too short and the measurement costs more than it reads.
+
+---
+
+## Step 3 — reload, and time it
+
+Read that same line and time the read.
+
+Fast means something pulled it back into the cache while you waited. Slow
+means nothing did. One bit, per line, per interval.
+
+---
+
+## The whole technique is this gap
+
+<svg
+  viewBox="0 0 900 400"
+  width="100%"
+  role="img"
+  stroke="currentColor"
+  fill="currentColor"
+>
+  <title>
+    Access latencies fall into two separated clusters, cached reads near 80
+    cycles and uncached reads near 220, with almost nothing between them
+  </title>
+  <line x1="70" y1="320" x2="840" y2="320" stroke-width="2" />
+  <rect x="90" y="169" width="56" height="151" />
+  <rect x="154" y="46" width="56" height="274" />
+  <rect x="218" y="234" width="56" height="86" />
+  <rect x="282" y="311" width="56" height="9" />
+  <rect x="346" y="317" width="56" height="3" />
+  <rect x="410" y="318" width="56" height="2" />
+  <rect x="474" y="316" width="56" height="4" />
+  <rect x="538" y="277" width="56" height="43" />
+  <rect x="602" y="183" width="56" height="137" />
+  <rect x="666" y="252" width="56" height="68" />
+  <rect x="730" y="306" width="56" height="14" />
+  <text x="118" y="356" font-size="26" text-anchor="middle">60</text>
+  <text x="438" y="356" font-size="26" text-anchor="middle">160</text>
+  <text x="758" y="356" font-size="26" text-anchor="middle">260</text>
+  <text x="455" y="394" font-size="26" text-anchor="middle">access latency, cycles</text>
+  <text x="182" y="30" font-size="26" text-anchor="middle">hit</text>
+  <text x="630" y="165" font-size="26" text-anchor="middle">miss</text>
+</svg>
+
+```notes
+Counts per 20-cycle bucket, 1,000 timed reads, buckets from 60 to 260 cycles:
+
+210, 380, 120, 12, 4, 3, 5, 60, 190, 95, 20
+
+The gap between the clusters is what makes the classification a threshold
+rather than a judgement. On a loaded machine it narrows, which is the first
+thing the Bench asks students to check on their own hardware.
+```
+
+---
+
+## Two preconditions, and they are the point
+
+- **Shared pages.** The attacker has to be able to *name* the line it
+  flushes — a shared library, or a hypervisor deduplicating identical pages.
+  This is not a channel between two processes that share nothing.
+- **A last-level cache shared across the package.** `clflush` reaches it, so
+  attacker and victim need not be on the same core.
+
+---
+
+## When the pages are not shared
+
+| Property | FLUSH+RELOAD | PRIME+PROBE |
+|---|---|---|
+| Needs shared memory | yes | no |
+| What it observes | a named line | a cache set |
+| Resolution | one line | one set, aliased |
+| Noise | low | higher |
+
+Turning off page deduplication is the defence most providers chose. It costs
+the attacker resolution, not access.
+
+---
+
+## Where this course stops
+
+Transient-execution attacks use this same cache as their read-out channel.
+Their *source* is speculative work that never architecturally happened.
+
+That is a different argument on different prerequisites, and this course
+does not teach it.
+
+---
+
+## Before the Bench
+
+Two numbers for your own machine:
+
+- **cache line size** — `getconf LEVEL1_DCACHE_LINESIZE`
+- **hit and miss latencies** — your CPU vendor's optimisation manual
+
+The Bench classifies your own timings against that threshold, not this
+deck's.
+
+---
+
+{/* _class: impact */}
+
+# No privilege at any step
+
+Not a debugger, not administrator rights, not a bug in the other process.
+
+That absence is why this channel is hard to close by policy.

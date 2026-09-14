@@ -1,0 +1,151 @@
+---
+title: Before and after
+description:
+  One leaking function, two rewrites, and the timing plot that says which of
+  them is a fix and which is only quieter
+---
+
+# Before and after
+
+You have measured the leak and you know which line causes it. Now write the
+fix. How will you know it is one?
+
+---
+
+## The function, as written
+
+```
+for i in 0 .. len(secret):
+    if given[i] != secret[i]:
+        return False
+return True
+```
+
+Week 4 measured this. Mean time rises with the number of leading bytes that
+match, and 10,000 calls make the trend unmistakable.
+
+---
+
+## The rewrite
+
+```
+diff = 0
+for i in 0 .. len(secret):
+    diff |= given[i] ^ secret[i]
+return diff == 0
+```
+
+Every byte is read. No branch depends on the secret. The loop count is a
+function of the length, which is not the secret.
+
+---
+
+## Three series, same axes
+
+<svg
+  viewBox="0 0 1020 400"
+  width="100%"
+  role="img"
+  stroke="currentColor"
+  fill="currentColor"
+>
+  <title>
+    The original rises steeply with agreement length, a partial fix still
+    rises gently, and the constant-time rewrite is flat
+  </title>
+  <line x1="70" y1="320" x2="840" y2="320" stroke-width="2" />
+  <line x1="70" y1="25" x2="70" y2="320" stroke-width="2" />
+  <text x="40" y="328" font-size="26" text-anchor="end">0</text>
+  <text x="40" y="198" font-size="26" text-anchor="end">50</text>
+  <text x="40" y="68" font-size="26" text-anchor="end">100</text>
+  <text x="80" y="358" font-size="26" text-anchor="middle">0</text>
+  <text x="440" y="358" font-size="26" text-anchor="middle">4</text>
+  <text x="800" y="358" font-size="26" text-anchor="middle">8</text>
+  <text x="455" y="394" font-size="26" text-anchor="middle">leading bytes matched</text>
+  <text x="20" y="20" font-size="26">ns</text>
+  <polyline
+    points="80,211 170,198 260,185 350,169 440,156 530,141 620,128 710,112 800,99"
+    fill="none"
+    stroke-width="4"
+  />
+  <polyline
+    points="80,138 170,135 260,133 350,130 440,128 530,125 620,122 710,120 800,117"
+    fill="none"
+    stroke-width="4"
+    stroke-dasharray="4 8"
+  />
+  <polyline
+    points="80,70 170,70 260,73 350,68 440,70 530,70 620,68 710,70 800,70"
+    fill="none"
+    stroke-width="4"
+    stroke-dasharray="14 8"
+  />
+  <text x="812" y="99" font-size="24">original</text>
+  <text x="812" y="120" font-size="24">"fixed"</text>
+  <text x="812" y="70" font-size="24">rewritten</text>
+</svg>
+
+```notes
+Mean nanoseconds per call, 10,000 calls at each agreement length 0 to 8:
+
+- original: 42, 47, 52, 58, 63, 69, 74, 80, 85
+- partial fix: 70, 71, 72, 73, 74, 75, 76, 77, 78
+- rewritten: 96, 96, 95, 97, 96, 96, 97, 96, 96
+
+The partial fix is the interesting series: a real improvement, a real
+reduction in slope, and still a channel. It is also faster than the correct
+rewrite, which is why it is tempting.
+```
+
+---
+
+{/* _class: centered */}
+
+## The middle line is the whole lecture
+
+Its slope is a fifth of the original's. It is faster than the correct
+rewrite. It still leaks — it just needs more samples.
+
+A rewrite that lowers the slope buys the attacker's patience, not the
+defender's safety.
+
+---
+
+## Three rules, in order of how often they are missed
+
+1. No secret-dependent **branch**.
+2. No secret-dependent **memory address** — Bernstein, 2005: a table lookup
+   indexed by a secret leaks through the cache even with no branch in sight.
+3. No compiler left free to reintroduce either.
+
+---
+
+## What the rules cannot reach
+
+Week 4's extra reductions and week 3's power correlation are not control
+flow. There is no branch to remove.
+
+Blinding closes those: randomise the input so the data-dependent quantity is
+no longer a function of the secret alone. Different countermeasure,
+different cost.
+
+---
+
+## Reading the code proves nothing
+
+The compiler is entitled to reintroduce a branch you removed, and does.
+
+Verification here means measuring the rewrite the same way you measured the
+original — which is why this Bench reuses week 4's harness rather than
+supplying a new one.
+
+---
+
+{/* _class: impact */}
+
+# Name what you made worse
+
+The correct rewrite is slower on average and harder to read than the code it
+replaces. Both are true and neither is a reason not to ship it.
+
+The Bench asks for both timing plots and one honest sentence about the cost.

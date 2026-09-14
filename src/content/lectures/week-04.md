@@ -9,6 +9,7 @@ claim: >-
   A channel needs no physical access at all: a clock at the far end of a
   network is a probe, and duration is the quantity it measures.
 channel: timing
+slides: /decks/week-04/
 teachers:
   - marisol-quaye
 related:

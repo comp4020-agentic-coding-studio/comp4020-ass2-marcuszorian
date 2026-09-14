@@ -1,0 +1,130 @@
+---
+title: Two clocks
+description:
+  An early-exit comparison measured until the trend is real, and the OpenSSL
+  attack that had no comparison in it at all
+---
+
+# Two clocks
+
+One is a stopwatch you hold against a function on your own machine. The
+other is at the far end of a network. What can each of them read?
+
+---
+
+## The legible case
+
+```
+for i in 0 .. len(secret):
+    if given[i] != secret[i]:
+        return False        # leaves early
+return True
+```
+
+Every additional leading byte that matches costs one more loop iteration.
+The duration is a function of how much of the secret you already have.
+
+---
+
+## One measurement says nothing
+
+A single call takes 40-90 ns and the machine's own noise is wider than that.
+The effect is real and smaller than the thing measuring it.
+
+The answer is not a better clock. It is more calls.
+
+---
+
+## Ten thousand calls
+
+<svg
+  viewBox="0 0 1020 400"
+  width="100%"
+  role="img"
+  stroke="currentColor"
+  fill="currentColor"
+>
+  <title>
+    Mean comparison time rises with the number of leading bytes that match for
+    the early-exit version, and stays flat for the constant-time one
+  </title>
+  <line x1="70" y1="320" x2="840" y2="320" stroke-width="2" />
+  <line x1="70" y1="25" x2="70" y2="320" stroke-width="2" />
+  <text x="40" y="328" font-size="26" text-anchor="end">0</text>
+  <text x="40" y="198" font-size="26" text-anchor="end">50</text>
+  <text x="40" y="68" font-size="26" text-anchor="end">100</text>
+  <text x="80" y="358" font-size="26" text-anchor="middle">0</text>
+  <text x="440" y="358" font-size="26" text-anchor="middle">4</text>
+  <text x="800" y="358" font-size="26" text-anchor="middle">8</text>
+  <text x="455" y="394" font-size="26" text-anchor="middle">leading bytes matched</text>
+  <text x="20" y="20" font-size="26">ns</text>
+  <polyline
+    points="80,211 170,198 260,185 350,169 440,156 530,141 620,128 710,112 800,99"
+    fill="none"
+    stroke-width="4"
+  />
+  <polyline
+    points="80,70 170,70 260,73 350,68 440,70 530,70 620,68 710,70 800,70"
+    fill="none"
+    stroke-width="4"
+    stroke-dasharray="10 8"
+  />
+  <text x="812" y="99" font-size="24">early exit</text>
+  <text x="812" y="70" font-size="24">constant time</text>
+</svg>
+
+```notes
+Plotted values, mean nanoseconds per call over 10,000 calls at each agreement
+length, x = 0 to 8 leading bytes matched:
+
+- early exit: 42, 47, 52, 58, 63, 69, 74, 80, 85
+- constant time: 96, 96, 95, 97, 96, 96, 97, 96, 96
+
+The constant-time version is slower on average. That is the trade, and the
+Bench asks students to name it rather than present the rewrite as free.
+```
+
+---
+
+{/* _class: centered */}
+
+## Now take the clock off the machine
+
+Brumley and Boneh, 2003. OpenSSL RSA decryption, timed from another host on
+the same network.
+
+There is no comparison against a secret anywhere in it.
+
+---
+
+## Two effects, pulling opposite ways
+
+| Effect | What varies with the secret | Direction |
+|---|---|---|
+| Montgomery extra reduction | how often the conditional subtraction fires, as the input nears a prime factor | slower |
+| Karatsuba / normal boundary | which multiplication routine the input's size selects | faster |
+
+Which one dominates depends on the machine. The turnover point is the
+signal.
+
+---
+
+## What that changes
+
+A timing channel is not a bug class. It is a property of any operation whose
+duration depends on secret data — including a statistical residue of an
+optimisation nobody thought of as a branch.
+
+OpenSSL's fix was blinding the input, not rewriting a comparison.
+
+---
+
+{/* _class: impact */}
+
+# Duration is a measurement
+
+And a network path is a probe. The attacker needed no access to the machine,
+no privilege on it, and nothing to look at.
+
+The Bench times both versions of the comparison above, plots mean against
+agreement length, and asks why one run would not have been enough.

@@ -9,6 +9,7 @@ claim: >-
   Two programs that share nothing but a processor still share its memory
   hierarchy, and the timing of that hierarchy is enough.
 channel: cache
+slides: /decks/week-06/
 teachers:
   - idris-fenn
 related:
