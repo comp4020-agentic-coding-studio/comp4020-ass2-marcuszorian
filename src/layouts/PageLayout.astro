@@ -1,8 +1,31 @@
 ---
+/**
+ * Wrapper for every `.mdx` page, with one addition over the theme's layout:
+ * it renders the page's name.
+ *
+ * `MdxPageLayout` renders the frontmatter `description` as a lead paragraph
+ * but no `<h1>`. BaseLayout's only title is the hero's, and the hero is drawn
+ * only when there is a hero *image* to draw it over --- so an image-free site
+ * gets no page title from the theme at all, and `heroTitle:` renders nothing.
+ * `ContentLayout` carries a fallback for the no-image case; this is the same
+ * fallback, in the same order it uses: title, then lead, then the body.
+ *
+ * `lead={false}` hands the lead paragraph over to this layout so the title can
+ * come before it; the theme would otherwise emit it above our slot content.
+ */
 import MdxPageLayout from "astro-theme-university/layouts/MdxPageLayout.astro";
 import { siteConfig } from "../site-config";
+
+const { frontmatter, ...direct } = Astro.props;
+const { title, description } = (frontmatter ?? direct) as {
+  title: string;
+  description?: string;
+};
 ---
 
-<MdxPageLayout siteConfig={siteConfig} {...Astro.props}>
+<MdxPageLayout siteConfig={siteConfig} {...Astro.props} lead={false}>
+  <slot name="head" slot="head" />
+  <h1>{title}</h1>
+  {description && <p class="lead">{description}</p>}
   <slot />
 </MdxPageLayout>
