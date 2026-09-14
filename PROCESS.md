@@ -2,72 +2,76 @@
 
 ## What I built
 
-SLOP4979, *Side Channels: What Machines Say Without Meaning To* — a
-twelve-week, image-free course on seven physical channels, taught as one
-compounding argument rather than a list of topics. Three assessments
-(30/30/40) run from reading a single trace to a capstone design review.
+SLOP4979, *Side Channels: What Machines Say Without Meaning To* — twelve weeks
+on seven physical channels, image-free, taught as one compounding argument,
+assessed 30/30/40, from a single trace to a capstone design review.
 
-## Choosing the concept, and the level
+## What I decided a good course looks like
 
-Concept selection was adversarial rather than first-idea: several candidates
-were scored against the brief's own criteria before the user asked which
-would allow the highest grade. Side channels won because its twelve weeks
-compound into one thesis, and because that structure is mechanically
-checkable — one `claim:` per week, no two the same — in a way a looser topic
-is not. [`eb10325`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/eb10325)
-records that decision, the deadpan register rule, and the image-free choice.
+The difference between the sites the brief names and the handbook entries
+beside them was not production values. Calling Bullshit, How to Make (Almost)
+Anything and CS 007 each carry one idea the whole way down; a handbook entry
+carries a topic list and a weighting table. Constructive alignment — outcomes,
+activities and assessment pointing at the same thing — is the standard answer,
+and certifies that the parts agree, not that they add up to anything: twelve
+aligned weeks can still be twelve encyclopedia entries.
 
-The starter's `SLOP1979` was a 1000-level code on a course that estimates
-mutual information and rewrites for constant time. Only the leading digit is
-free and it does not affect the mark; plausibility does.
-[`c17f3a9`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/c17f3a9)
-moved it rather than leave the default unexamined. The no-imagery rule
-likewise earned an amendment:
-[`d5fc35d`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/d5fc35d)
-permits inline SVG data figures — a power trace, a thermal decay, a cost
-curve — because a course about measurement that shows no measurements argues
-against itself. Photography and portraits stay out.
+So, in two parts. **A course is one argument, not twelve topics, and the test
+of a week is whether deleting it weakens the argument.** And a syllabus that
+says only what a week *covers* hides whether it does anything, so every week
+must name what a student does. Concept selection was run against that position
+adversarially
+([`eb10325`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/eb10325)):
+side channels won because its weeks compound, and because "compound" is
+mechanically checkable where a looser topic is not.
 
-## Two decisions worth the space
+## Which of it I encoded
 
-**A defect class, closed once.** Four pages named "Assignment 1", which is
-not an assessment this site publishes. One week referred to "the deck" it did
-not have. Another sent students to readings that did not exist. Three edits
-would have fixed three symptoms;
-[`b1398dc`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/b1398dc)
-fixed the content and
-[`3d7f5b3`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/3d7f5b3)
-added the contract: *the prose may not promise something the site does not
-have*. Mutating the content back proved the point twice over — the first
-version of that test **passed** the mutation, because it read `title` from
-the wrong level of the generated API and was comparing every page against the
-empty string. A test never seen to fail is not evidence of anything, so every
-harness commit here was mutation-tested before it landed.
+A position not written down gets negotiated away by the twelfth week.
+[`19a83c2`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/19a83c2)
+gives every week a `claim:` — one sentence on what it changes about the thesis,
+no two alike — rendered in order on `/lectures/`, so the course reads as an
+argument, not a grid of cards. The agent's instinct was to summarise coverage;
+a rule rejecting coverage-shaped claims was cheaper than rejecting twelve by
+hand. The activity half became the Bench.
 
-**Deleting a week's work.** CLAUDE.md holds that a week which could be
-deleted without the argument weakening is the wrong week. Week 8's Bench
-ranked channels on three axes; week 10's Bench ranked channels on the
-taxonomy's own axes, with a number attached.
-[`3bcfa49`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/3bcfa49)
-deleted the first and made week 8 measure the thermal decay its own lecture
-describes. The same defect had put four different channel counts on four
-pages, so
+Then the accounting, where I stopped trusting prose.
 [`26b665f`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/26b665f)
-derives the number from frontmatter and fails the build on any page that
-disagrees.
+derives the channel count from frontmatter and fails the build on any page that
+disagrees — four pages had four different numbers.
+[`3d7f5b3`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/3d7f5b3)
+holds prose to the site it describes, after four pages named "Assignment 1",
+which is not an assessment here. Its first version **passed** its own mutation,
+comparing every page against an empty string; a test never seen to fail is not
+evidence, so every harness commit since was mutated before landing — which is
+how the same defect surfaced a fourth time, in a page claiming "most Benches"
+where the data says six of twelve
+([`e22b684`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/e22b684)).
 
-## What I did not build
+Two rules went unmeasured until late. The image-free decision had silently
+deleted the `<h1>` from four pages — the theme draws a title only beside a hero
+image, and axe rates the absence as best-practice
+([`e3762cc`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/e3762cc)).
+Assignment 1's focus-styling feedback is answered in the harness, not a
+stylesheet:
+[`12b0736`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/12b0736)
+drives a browser, presses Tab and measures the ring against the brand token at
+both viewports, a rule that had been holding only by the theme's accident.
 
-Five decks, deliberately. Week 7 is optical and this site is image-free, so
-its deck would be prose about photographs it cannot show; weeks 1 and 9 are
-arguments, not procedures. No transient-execution week either: it is the
-decade's most consequential disclosure and it leaks what a program only
-*speculated*, which is a different argument on different prerequisites, so
-weeks 6 and 12 state that boundary as a decision
+**The expensive one.** Two Benches ranked channels on axes; by my own test one
+had to go, so
+[`3bcfa49`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/3bcfa49)
+deleted a finished week's work and made week 8 measure the thermal decay its
+lecture describes.
+
+## Which I left out
+
+Five decks: week 7 is optical on an image-free site; weeks 1 and 9 argue rather
+than instruct. No transient-execution week either: it leaks what a program only
+*speculated*, a different argument on prerequisites this course never builds,
+so weeks 6 and 12 state that boundary as a decision
 ([`9ca653d`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/9ca653d))
-rather than leave a silent gap.
-
-CI runs nothing while the repo is private, so `pnpm check` and
-`pnpm check:evidence` ran locally before every commit — 184 tests, 45 pages,
-and 79 slides measured for fit in a real browser rather than asserted against
-parsed HTML.
+rather than leave a gap. The image-free rule took one amendment
+([`d5fc35d`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/d5fc35d)):
+inline SVG data figures plotted from numbers in the file, because a course
+about measurement that shows none argues against itself.
