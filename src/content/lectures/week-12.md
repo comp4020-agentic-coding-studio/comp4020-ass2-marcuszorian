@@ -65,3 +65,8 @@ the one an engineer is actually paid to answer.
   every channel applies, and a ranking with no residual risk admitted
 - where the method stops: week 9's placement defence, and the fact that the
   cheapest move is often not on the channel list at all
+- the boundary week 6 drew, restated here as a limit on the method rather than
+  on a week: this ranking covers channels that leak what a program did, and is
+  silent on transient execution, which leaks what a program only speculated —
+  a device exposed to both needs a second analysis this course has not taught,
+  and a design review that does not say so has overclaimed its coverage

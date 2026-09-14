@@ -54,6 +54,21 @@ average and always harder to read than the version it replaces, which is the
 same trade this week's Bench asks you to make and then name honestly, rather
 than presenting a rewrite as a strict improvement.
 
+Some leaks are not reachable by restructuring code at all. Where the secret is
+an exponent or a scalar rather than a branch condition, the operation's
+duration and its power profile depend on that secret however the loop is
+written, and the countermeasure is to randomise the input instead. Coron's
+1999 paper on elliptic-curve implementations set out the three blindings still
+in use — randomise the scalar by adding a multiple of the group order,
+randomise the base point, randomise the projective representation — each of
+which leaves the result unchanged and makes the measured trace different every
+time. Blinding is the software counterpart of week 3's masking, and it is
+priced differently: it costs arithmetic and a source of randomness rather than
+readability, and unlike a constant-time rewrite it can be applied to an
+implementation whose control flow you are not willing to touch. It is also the
+answer to week 4's extra reductions, which is why a rewrite that only reorders
+branches does not close them.
+
 ## Outline
 
 - the three rules in order of how often they are missed: no secret-dependent

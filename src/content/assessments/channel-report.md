@@ -4,7 +4,7 @@ description:
   A full treatment of one of the seven channels the course argues, written to
   the same standard the lectures introducing them were written to
 week: 8
-due: 2027-04-16T12:00:00+10:00
+due: 2027-04-23T12:00:00+10:00
 weight: 30
 marking:
   mode: weighted
@@ -38,6 +38,13 @@ choosing, in enough depth that a reader who missed the corresponding lecture
 could follow the argument from your report alone. A report that only
 describes the mechanism, without the disclosure or the cost of defending
 against it, has done a third of the assignment.
+
+The scope and the deadline are set together. Week 8's lecture, the last of
+the seven, runs on 12 April; the report is set at that week's Bench and due
+eleven days after it, on the Friday of week 9. Every channel you may choose
+from has been lectured, and its Bench run, before the deadline — including
+the one taught last, which is otherwise the channel a student cannot afford
+to pick.
 
 ## What you submit
 

@@ -55,6 +55,27 @@ deck walks through one trace slowly enough to see the shape a single squaring
 operation and a single multiply produce, before the Bench and the Trace
 Analysis Lab ask you to do the harder version — many traces, added together — yourself.
 
+If the attack is statistical, the defence has to attack the statistics rather
+than the measurement. Chari, Jutla, Rao and Rohatgi presented that argument at
+the same 1999 conference as Kocher: split every secret intermediate value into
+several shares that are individually uniform and only jointly meaningful, so
+that no single point in the trace depends on the secret and the correlation
+has nothing stable to find. What they proved is a bound, not immunity — the
+number of traces an attacker needs grows exponentially in the number of shares
+— and that is the shape every countermeasure in this course takes. Not "the
+leak is gone" but "the leak now costs this much."
+
+The cost of masking is paid in silicon. Each share is another copy of the
+datapath and another demand on a random-number source that has to stay
+independent under load, which is why Mangard, Oswald and Popp's 2007 textbook
+pairs its chapter on masking with a chapter on attacking masked
+implementations: glitches in combinational logic, shares that recombine early
+in a shared register, randomness too weak to keep them apart. A masked chip is
+a claim about area, throughput and a random source, and it is falsifiable by
+measurement. Week 11 asks the harder version of the same question — what is
+left when the hardware is already fabricated and the only thing you can change
+is the code.
+
 ## Outline
 
 - what a power trace looks like for a single, known operation, and the point

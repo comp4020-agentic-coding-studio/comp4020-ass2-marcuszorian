@@ -50,6 +50,26 @@ produces is closer to a language-modelling problem than a signal-processing
 one, which is why the channel stays open even against keyboards designed to
 sound quieter.
 
+The generalisation that matters, though, is not to another keyboard. Genkin,
+Shamir and Tromer's 2014 paper "RSA Key Extraction via Low-Bandwidth Acoustic
+Cryptanalysis" recorded the machine rather than the thing typed on it: the
+capacitors and coils in a laptop's voltage regulator vibrate as the
+processor's load changes, and the resulting noise sits under 20 kHz — within
+range of a plain mobile phone placed beside the computer, or a more sensitive
+microphone four metres away. Different decryption keys produced measurably
+different acoustic signatures, enough to recover a full 4096-bit RSA key in
+about an hour. That upper limit is roughly five orders of magnitude below the
+clock driving the computation, which is the point rather than a caveat: the
+channel does not observe operations, it observes the envelope of very many of
+them, and the key falls out of the aggregate.
+
+The defensive cost is the instructive part, because nobody shielded anything.
+The response shipped in GnuPG 1.4.16, alongside the disclosure, was
+exponentiation blinding — randomising the intermediate values so that a
+chosen ciphertext no longer produces a predictable profile to measure. An
+acoustic emanation from a power supply was closed by a change to arithmetic,
+which is week 11's argument arriving nine weeks early.
+
 ## Outline
 
 - what makes one key's sound distinguishable from another's, in mechanical
@@ -59,3 +79,7 @@ sound quieter.
   signal-processing result
 - the channel's own limits: what a second, unseen keyboard does to a trained
   classifier, and why that limit is smaller than it sounds
+- the same channel with no keyboard in it: acoustic emanation from a laptop's
+  own power supply, what a sub-20 kHz ceiling forces the analysis to do
+  instead of reading operations, and why the fix was arithmetic rather than
+  soundproofing
