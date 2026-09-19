@@ -68,8 +68,8 @@ argument.
 
 ## Which I left out
 
-Five decks: week 7 is optical on an image-free site; weeks 1 and 9 argue rather
-than instruct. No transient-execution week either: it leaks what a program only
+Three decks: week 7 is optical on an image-free site; weeks 1 and 9 argue
+rather than instruct. No transient-execution week either: it leaks what a program only
 *speculated*, a different argument on prerequisites this course never builds,
 so weeks 6 and 12 state that boundary as a decision
 ([`9ca653d`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-marcuszorian/commit/9ca653d)).
