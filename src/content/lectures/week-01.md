@@ -54,6 +54,17 @@ its own arithmetic. Every week after this one is a variation on that same
 observation, applied to a different physical quantity and argued from a
 different disclosure.
 
+Kocher's case is not the field's only founding disclosure, and the other one
+draws the boundary this course keeps to. Lampson's 1973 confinement problem
+names a *covert* channel: a signalling path two cooperating processes build
+on purpose, against a system meant to keep them apart, using a resource
+(shared load, file locks, whatever changes state) neither party needs for
+its stated job. A side channel, the kind every week after this one measures,
+needs no cooperation and no intent — the leak rides on a computation doing
+only what it was asked to do, read by an adversary the program never
+addressed. Lampson supplies the vocabulary; Kocher supplies the case this
+course actually argues from.
+
 ## Outline
 
 - the boundary this course draws: a side channel is a physical effect of a
